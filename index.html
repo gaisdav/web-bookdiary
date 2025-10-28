@@ -20,6 +20,7 @@
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px; /* Отступ от ссылок */
       }
       h1 {
         color: #007bff;
@@ -31,6 +32,30 @@
         font-size: 1.2rem;
         margin-bottom: 30px;
       }
+
+      /* --- Стили для ссылок --- */
+      .link-container {
+        display: flex; /* Располагает ссылки горизонтально */
+        justify-content: center; /* Центрирует ссылки */
+        gap: 20px; /* Пространство между ссылками */
+        margin-top: 30px;
+      }
+      .action-link {
+        /* Делаем ссылки похожими на кнопки */
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background-color: #007bff; /* Основной цвет */
+        border-radius: 8px;
+        text-decoration: none; /* Убираем подчеркивание */
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+      }
+      .action-link:hover {
+        background-color: #0056b3; /* Цвет при наведении */
+      }
+      /* --- Конец стилей для ссылок --- */
     </style>
   </head>
   <body>
@@ -45,6 +70,11 @@
         <p>
             Whether you're a casual reader or a dedicated bookworm, BookDiary helps you visualize your achievements and stay motivated to reach your reading goals.
         </p>
+    </div>
+    
+    <div class="link-container">
+        <a href="/privacy-policy/index.html" class="action-link">Privacy Policy</a>
+        <a href="/contacts/index.html" class="action-link">Contacts</a>
     </div>
   </body>
 </html>

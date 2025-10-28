@@ -36,12 +36,32 @@
       a:hover {
         text-decoration: underline;
       }
-      .last-updated {
+      
+      /* Новый стиль для футера */
+      footer {
         margin-top: 40px;
         padding-top: 15px;
         border-top: 1px solid #eee;
         font-size: 0.9rem;
         color: #666;
+        text-align: center; /* Центрируем содержимое футера */
+      }
+      
+      .footer-links a {
+        color: #666; /* Нейтральный цвет для ссылок в футере */
+        margin: 0 10px;
+        text-decoration: none;
+      }
+      
+      .footer-links a:hover {
+        color: #007bff;
+        text-decoration: underline;
+      }
+      
+      .last-updated {
+        margin-bottom: 10px;
+        color: #666;
+        font-size: 0.9rem;
       }
     </style>
   </head>
@@ -73,6 +93,13 @@
       If you have questions about this policy, please contact us at: <a href="mailto:gais.davletkildin@gmail.com">gais.davletkildin@gmail.com</a>.
     </p>
 
-    <p class="last-updated">Last updated: October 2025</p>
+    <footer>
+        <p class="last-updated">Last updated: October 2025</p>
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            |
+            <a href="../contacts/index.html">Contacts</a>
+        </div>
+    </footer>
   </body>
 </html>

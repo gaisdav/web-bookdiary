@@ -6,21 +6,21 @@
     <title>BookDiary - Your Reading Companion</title>
     <style>
       body {
-        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* Более динамичный шрифт */
+        font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.7;
         color: #444;
-        background-color: #f7f9fc; /* Мягкий фон */
+        background-color: #f7f9fc;
         padding: 50px 20px;
         max-width: 700px;
         margin: auto;
-        text-align: center; /* Центрирование контента */
+        text-align: center;
       }
       .card {
         background-color: white;
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px; /* Отступ от ссылок */
+        margin-bottom: 30px;
       }
       h1 {
         color: #007bff;
@@ -33,29 +33,29 @@
         margin-bottom: 30px;
       }
 
-      /* --- Стили для ссылок --- */
+      /* --- Стили для FOOTER (изменено) --- */
       .link-container {
-        display: flex; /* Располагает ссылки горизонтально */
-        justify-content: center; /* Центрирует ссылки */
-        gap: 20px; /* Пространство между ссылками */
-        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 30px; /* Увеличим расстояние для ясности */
+        margin-top: 50px; /* Добавим больше отступа сверху, как в футере */
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0; /* Добавим разделительную линию футера */
+        font-size: 0.95rem;
       }
-      .action-link {
-        /* Делаем ссылки похожими на кнопки */
+      .footer-link {
+        /* Новый класс для ссылок в футере, удаляем стили кнопок */
         display: inline-block;
-        padding: 10px 20px;
-        color: white;
-        background-color: #007bff; /* Основной цвет */
-        border-radius: 8px;
-        text-decoration: none; /* Убираем подчеркивание */
-        font-weight: 600;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        color: #666; /* Более нейтральный цвет */
+        text-decoration: none; /* Сначала уберем подчеркивание */
+        font-weight: 500;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
       }
-      .action-link:hover {
-        background-color: #0056b3; /* Цвет при наведении */
+      .footer-link:hover {
+        color: #007bff; /* Акцентный цвет при наведении */
+        text-decoration: underline; /* Добавляем подчеркивание при наведении */
       }
-      /* --- Конец стилей для ссылок --- */
+      /* --- Конец стилей для FOOTER --- */
     </style>
   </head>
   <body>
@@ -72,9 +72,9 @@
         </p>
     </div>
     
-    <div class="link-container">
-        <a href="./privacy-policy/index.html" class="action-link">Privacy Policy</a>
-        <a href="./contacts/index.html" class="action-link">Contacts</a>
-    </div>
-  </body>
+    <footer class="link-container">
+        <a href="./privacy-policy/index.html" class="footer-link">Privacy Policy</a>
+        <a href="./contacts/index.html" class="footer-link">Contacts</a>
+    </footer>
+</body>
 </html>

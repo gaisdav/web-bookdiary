@@ -16,6 +16,7 @@
                 margin: 50px auto;
                 border-radius: 8px; /* Скругленные углы контейнера */
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Легкая тень для "плавающего" эффекта */
+                text-align: center; /* Центрирование текста по умолчанию */
             }
             h2 {
                 color: #007bff; /* Пример фирменного синего цвета */
@@ -24,7 +25,27 @@
                 margin-bottom: 20px;
                 text-align: center;
             }
-    
+            /* --- Стили для FOOTER (добавлены) --- */
+            .link-container {
+                display: flex;
+                justify-content: center;
+                gap: 30px; 
+                margin-top: 50px; 
+                padding-top: 20px;
+                border-top: 1px solid #e0e0e0; 
+                font-size: 0.95rem;
+            }
+            .footer-link {
+                color: #666; 
+                text-decoration: none; 
+                font-weight: 500;
+                transition: color 0.3s ease, text-decoration 0.3s ease;
+            }
+            .footer-link:hover {
+                color: #007bff; 
+                text-decoration: underline; 
+            }
+            /* --- Конец стилей для FOOTER --- */
         </style>
     </head>
     <body class="container">
@@ -32,14 +53,19 @@
 
         <h2>Email Verified!</h2>
 
-        <p style="text-align: center;">
+        <p>
             Your email address has been successfully verified. 
         </p>
-        <p style="text-align: center;">
+        <p>
             Thank you for registering with BookDiary.
         </p>
-        <p style="text-align: center;">
+        <p>
             You can now log in and start exploring your personal book diary!
         </p>
+        
+        <footer class="link-container">
+            <a href="../privacy-policy/index.html" class="footer-link">Privacy Policy</a>
+            <a href="../contacts/index.html" class="footer-link">Contacts</a>
+        </footer>
     </body>
 </html>

@@ -44,8 +44,8 @@
         }
         
         .action-button {
-            width: 100%; /* Теперь 100% от 320px */
-            padding: 12px 25px;
+            width: 100%; 
+            padding: 12px 20px; /* Уменьшаем горизонтальный padding для малых экранов */
             font-size: 1rem;
             font-weight: 700;
             color: #fff;
@@ -57,6 +57,7 @@
             text-decoration: none;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            white-space: normal; /* Разрешаем перенос текста */
         }
         .action-button:hover {
             background-color: #0056b3;
@@ -64,12 +65,6 @@
         }
         
         /* Auxiliary text */
-        .copy-info {
-            font-size: 0.9rem;
-            color: #999;
-            margin-top: 15px;
-            margin-bottom: -5px; /* Уменьшаем отступ до кнопки */
-        }
         #message-box {
             margin-top: 15px;
             padding: 10px;
@@ -117,21 +112,16 @@
         
         <!-- Группа кнопок, ограниченная по ширине и центрированная -->
         <div class="button-wrapper">
-            <!-- Кнопка 1: Открыть Deep Link -->
+            <!-- Кнопка: Открыть Deep Link -->
             <a id="deep-link-button" class="action-button" href="javascript:void(0)" onclick="openDeepLink()">
-                Open in BookDiary Mobile App
+                Open BookDiary App
             </a>
             
             <p class="copy-info">
-                If the app did not open automatically, copy the link for manual entry:
+                If the app is not installed, you will be redirected to the App Store or Google Play.
             </p>
-
-            <!-- Кнопка 2: Скопировать ссылку -->
-            <button id="copy-button" class="action-button" onclick="copyLink()">
-                Copy Link
-            </button>
             
-            <!-- Скрытое поле для хранения и копирования полной ссылки -->
+            <!-- Скрытое поле для хранения полной ссылки (оставлено только для генерации, но не для копирования) -->
             <input type="text" id="link-to-copy" style="opacity: 0; position: absolute; pointer-events: none;"/>
         </div>
         
@@ -140,97 +130,70 @@
     <footer class="link-container">
         <a href="../index.html" class="footer-link">Home</a>
         |
-        <a href="./privacy-policy/index.html" class="footer-link">Privacy Policy</a>
+        <a href="../privacy-policy/index.html" class="footer-link">Privacy Policy</a>
         |
-        <a href="./contacts/index.html" class="footer-link">Contacts</a>
+        <a href="../contacts/index.html" class="footer-link">Contacts</a>
     </footer>
 
     <script>
         // Идентификатор нашей схемы Deep Link
         const APP_SCHEME = 'bookdiary://new-password';
 
+        // Заглушки для магазинов (обновите на реальные ссылки позже)
+        const IOS_FALLBACK = 'https://apps.apple.com/';
+        const ANDROID_FALLBACK = 'https://play.google.com/store/apps';
+        
+        // Определяем платформу для выбора ссылки-заглушки
+        const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+        const fallbackUrl = isIOS ? IOS_FALLBACK : ANDROID_FALLBACK;
+
+
         /**
-         * 1. Динамически генерирует полную глубокую ссылку, включая все параметры и фрагмент (токен)
-         * 2. Обновляет скрытое поле ввода.
+         * 1. Динамически генерирует полную глубокую ссылку, включая фрагмент (токен)
          * @returns {string} Полная глубокая ссылка.
          */
         function generateDeepLink() {
-            // Получаем только часть URL с параметрами (query string)
-            const queryString = window.location.search;
-            // Получаем часть URL с фрагментом (hash/токены Supabase)
-            const hashFragment = window.location.hash;
-
             // Supabase использует фрагмент (#access_token=...)
+            const hashFragment = window.location.hash;
+            
             // Формируем полную глубокую ссылку: bookdiary://new-password + hash
             const fullDeepLink = APP_SCHEME + hashFragment;
             
-            // Записываем ссылку в скрытое поле для копирования
+            // Записываем ссылку в скрытое поле (на всякий случай)
             document.getElementById('link-to-copy').value = fullDeepLink;
             
             return fullDeepLink;
         }
 
         /**
-         * Открывает Deep Link.
+         * Трассировка открытия приложения с Fallback на магазин.
          */
         function openDeepLink() {
             const link = generateDeepLink();
+            const messageBox = document.getElementById('message-box');
+
+            // 1. Попытка открыть Deep Link
             window.location.href = link;
 
-            // Опционально: показать сообщение, если приложение не открылось
-            setTimeout(() => {
-                const messageBox = document.getElementById('message-box');
-                messageBox.textContent = 'If the app did not open, please use the "Copy Link" button below.';
-                messageBox.style.display = 'block';
-                messageBox.style.backgroundColor = '#fff3cd'; // Yellow for warning
-                messageBox.style.color = '#856404';
-            }, 1000); // Даем 1 секунду на попытку открытия
-        }
-
-        /**
-         * Копирует сгенерированную Deep Link в буфер обмена.
-         */
-        function copyLink() {
-            const copyText = document.getElementById('link-to-copy');
+            // 2. Установка таймера для Fallback
+            const timeout = 1000; // 1 секунда
             
-            // Выделяем текст в скрытом поле
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // Для мобильных
-
-            // Копируем
-            let success = false;
-            try {
-                // Используем document.execCommand('copy') для кросс-браузерной совместимости
-                success = document.execCommand('copy');
-            } catch (err) {
-                console.error('Failed to copy text', err);
-            }
-
-            const messageBox = document.getElementById('message-box');
-            if (success) {
-                messageBox.textContent = 'Link successfully copied! Open it on your phone.';
-                messageBox.style.display = 'block';
-                messageBox.style.backgroundColor = '#d4edda';
-                messageBox.style.color = '#155724';
+            // Мы предполагаем, что если приложение не открылось за 1 секунду, 
+            // или его нет, необходимо перенаправить пользователя в магазин.
+            setTimeout(() => {
+                // 3. Fallback: перенаправление в магазин 
+                window.location.href = fallbackUrl;
                 
-                // Меняем текст кнопки для обратной связи
-                const copyButton = document.getElementById('copy-button');
-                copyButton.textContent = 'Link Copied!';
-                setTimeout(() => { copyButton.textContent = 'Copy Link'; }, 2000);
-            } else {
-                messageBox.textContent = 'Copying failed. Please copy the link manually.';
+                messageBox.textContent = 'App did not open automatically. Redirecting to the store...';
                 messageBox.style.display = 'block';
-                messageBox.style.backgroundColor = '#f8d7da';
-                messageBox.style.color = '#721c24';
-            }
+                messageBox.style.backgroundColor = '#fff3cd'; // Warning color
+                messageBox.style.color = '#856404';
+            }, timeout);
         }
 
         // Запускаем генерацию ссылки при загрузке страницы
         window.onload = function() {
             generateDeepLink();
-            
-            // openDeepLink() не вызываем автоматически, так как это может блокироваться браузерами 
-            // без явного действия пользователя (клика).
         };
     </script>
 </body>

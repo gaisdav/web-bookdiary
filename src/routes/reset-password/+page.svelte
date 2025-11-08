@@ -271,6 +271,6 @@
 
   .message-error {
     background-color: var(--color-error-light);
-    color: var(--color-error-dark);
+    color: var(--color-error);
   }
 </style>

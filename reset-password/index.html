@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookDiary - Reset Password</title>
+    <!-- 1. Загрузка Supabase Client SDK -->
+    <!-- Здесь используется версия 2, которая экспортирует 'createClient' глобально -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        /* Использование Inter Font (загружается автоматически в Immersive) */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: #f7f9fc;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+        }
+        button:disabled {
+            background-color: #a0c3e8;
+            cursor: not-allowed;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Reset Your Password</h2>
+    
+    <div id="loading-state" class="message success" style="display: none;">
+        Checking session...
+    </div>
+    
+    <div id="error-state" class="message error" style="display: none;">
+        Invalid or expired reset link. Please try resetting your password again.
+    </div>
+
+    <form id="reset-form" style="display: none;">
+        <p class="message" id="instruction-message" style="background-color: #e9f0f9; color: #007bff; font-weight: 500;">
+            Enter your new password below.
+        </p>
+
+        <label for="password">New Password</label>
+        <input type="password" id="password" required minlength="6" />
+        
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" id="confirm_password" required minlength="6" />
+
+        <button type="submit" id="submit-button">Set New Password</button>
+    </form>
+    
+    <div id="success-state" class="message success" style="display: none;">
+        <p>✅ Your password has been successfully updated!</p>
+        <p style="margin-top: 10px;">You can now close this window and log in to the BookDiary app.</p>
+    </div>
+</div>
+
+<script>
+    const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
+    console.log(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Инициализация клиента Supabase:
+    // ИСПРАВЛЕНИЕ: Используется глобальная функция createClient, 
+    // которая доступна после загрузки скрипта Supabase SDK.
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // --- ССЫЛКИ НА ЭЛЕМЕНТЫ DOM ---
+    const loadingState = document.getElementById('loading-state');
+    const errorState = document.getElementById('error-state');
+    const resetForm = document.getElementById('reset-form');
+    const successState = document.getElementById('success-state');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+    const submitButton = document.getElementById('submit-button');
+
+    /**
+     * Обрабатывает форму сброса пароля.
+     */
+    async function handleReset(event) {
+        event.preventDefault();
+
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (password !== confirmPassword) {
+            // Используем сообщение на экране вместо alert()
+            document.getElementById('instruction-message').textContent = 'Error: Passwords do not match!';
+            document.getElementById('instruction-message').className = 'message error';
+            return;
+        }
+        
+        // Сброс сообщения
+        document.getElementById('instruction-message').textContent = 'Enter your new password below.';
+        document.getElementById('instruction-message').className = 'message';
+
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Updating...';
+
+        try {
+            // Обновляем пароль. Это сработает, потому что onAuthStateChange уже 
+            // установил временную сессию по токену из URL.
+            const { error } = await supabase.auth.updateUser({ password: password });
+
+            if (error) {
+                console.error('Update Error:', error);
+                showState('error', 'Error updating password: ' + error.message);
+                return;
+            }
+
+            // Успех!
+            await supabase.auth.signOut(); // Выход из временной сессии после смены пароля
+            showState('success');
+            resetForm.style.display = 'none';
+
+        } catch (err) {
+            console.error('Fatal Error:', err);
+            showState('error', 'An unexpected error occurred.');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Set New Password';
+        }
+    }
+    
+    /**
+     * Управляет отображением состояний UI.
+     */
+    function showState(state, message = '') {
+        loadingState.style.display = 'none';
+        errorState.style.display = 'none';
+        resetForm.style.display = 'none';
+        successState.style.display = 'none';
+
+        if (state === 'loading') {
+            loadingState.style.display = 'block';
+        } else if (state === 'form') {
+            resetForm.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Set New Password';
+        } else if (state === 'success') {
+            successState.style.display = 'block';
+        } else if (state === 'error') {
+            errorState.textContent = message;
+            errorState.style.display = 'block';
+        }
+    }
+
+    // --- ГЛАВНАЯ ЛОГИКА ---
+    showState('loading');
+    
+    // Подписываемся на изменения состояния, чтобы обнаружить переход по ссылке сброса пароля.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        
+        // PASSWORD_RECOVERY — это событие, которое срабатывает, когда Supabase
+        // успешно парсит токены из URL и устанавливает временную сессию.
+        if (event === 'PASSWORD_RECOVERY') {
+            // Если сессия установлена по ссылке сброса, показываем форму.
+            showState('form');
+        } else if (event === 'INITIAL_SESSION' && !session) {
+             // Если нет сессии при старте, вероятно, ссылка недействительна или уже использована.
+             showState('error', 'The password reset link is invalid, expired, or was already used.');
+        } else if (event === 'SIGNED_IN' && session) {
+             // Если это обычный вход, а не сброс, может потребоваться дополнительная проверка.
+             // В данном контексте предполагаем, что если есть сессия, мы показываем форму, 
+             // чтобы пользователь мог сбросить пароль (хотя PASSWORD_RECOVERY более специфичен).
+             showState('form');
+        }
+    });
+
+    // Очистка подписки при закрытии страницы
+    window.addEventListener('beforeunload', () => {
+        if (subscription) subscription.unsubscribe();
+    });
+
+    // Добавляем слушатель события на отправку формы
+    resetForm.addEventListener('submit', handleReset);
+    
+</script>
+</body>
+</html>

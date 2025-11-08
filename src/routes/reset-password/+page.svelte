@@ -237,7 +237,7 @@
   }
 
   button:hover:not(:disabled) {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-primary);
     box-shadow: var(--shadow-small);
   }
 

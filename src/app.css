@@ -1,0 +1,204 @@
+:root {
+	/* Primary colors */
+	--color-primary: #007AFF;
+	--color-primary-dark: #0056B3;
+	--color-primary-light: #4DA3FF;
+
+	/* Background colors */
+	--color-background: #FAFAFA;
+	--color-background-secondary: #F9F9F9;
+	--color-background-tertiary: #F0F0F0;
+
+	/* Text colors */
+	--color-text: #1A1A1A;
+	--color-text-secondary: #666666;
+	--color-text-tertiary: #999999;
+	--color-text-inverse: #FFFFFF;
+
+	/* Border colors */
+	--color-border: #DDDDDD;
+	--color-border-light: #EEEEEE;
+	--color-border-dark: #CCCCCC;
+
+	/* Status colors */
+	--color-success: #34C759;
+	--color-success-light: #ECFDF3;
+	--color-success-dark: #1A2E1A;
+	--color-error: #FF3B30;
+	--color-error-light: #FEF3F2;
+	--color-error-dark: #2E1A1A;
+	--color-warning: #FF9500;
+	--color-warning-light: #FFF4E6;
+	--color-warning-dark: #2E1A0D;
+	--color-info: #5856D6;
+	--color-info-light: #F0F0FF;
+	--color-info-dark: #1A1A2E;
+
+	/* Overlay colors */
+	--color-overlay: rgba(0, 0, 0, 0.5);
+	--color-overlay-light: rgba(0, 0, 0, 0.2);
+
+	/* Input colors */
+	--color-input-background: #F9F9F9;
+	--color-input-border: #DDDDDD;
+	--color-input-placeholder: #999999;
+
+	/* Tab colors */
+	--color-tab-bar: #FFFFFF;
+	--color-tab-bar-border: #DDDDDD;
+	--color-tab-active: #007AFF;
+	--color-tab-inactive: #999999;
+	--color-tab-label: #666666;
+	--color-tab-label-active: #007AFF;
+
+	/* Spacing */
+	--spacing-xs: 4px;
+	--spacing-sm: 8px;
+	--spacing-md: 16px;
+	--spacing-lg: 24px;
+	--spacing-xl: 32px;
+	--spacing-xxl: 48px;
+	--spacing-xxxl: 64px;
+
+	/* Typography */
+	--font-family-regular: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--font-size-xs: 12px;
+	--font-size-sm: 14px;
+	--font-size-md: 16px;
+	--font-size-lg: 18px;
+	--font-size-xl: 20px;
+	--font-size-xxl: 24px;
+	--font-size-xxxl: 32px;
+
+	--line-height-xs: 16px;
+	--line-height-sm: 20px;
+	--line-height-md: 24px;
+	--line-height-lg: 28px;
+	--line-height-xl: 32px;
+	--line-height-xxl: 36px;
+	--line-height-xxxl: 40px;
+
+	/* Border radius */
+	--radius-xs: 4px;
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	--radius-round: 9999px;
+
+	/* Shadows */
+	--shadow-small: 0 2px 3px rgba(0, 0, 0, 0.1);
+	--shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.15);
+	--shadow-large: 0 6px 8px rgba(0, 0, 0, 0.2);
+
+	/* Animation */
+	--timing-fast: 200ms;
+	--timing-normal: 300ms;
+	--timing-slow: 500ms;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Primary colors */
+		--color-primary: #0A84FF;
+		--color-primary-dark: #0066CC;
+		--color-primary-light: #4DA3FF;
+
+		/* Background colors */
+		--color-background: #121212;
+		--color-background-secondary: #1C1C1E;
+		--color-background-tertiary: #2C2C2E;
+
+		/* Text colors */
+		--color-text: #FFFFFF;
+		--color-text-secondary: #EBEBF5;
+		--color-text-tertiary: #8E8E93;
+		--color-text-inverse: #000000;
+
+		/* Border colors */
+		--color-border: #38383A;
+		--color-border-light: #48484A;
+		--color-border-dark: #2C2C2E;
+
+		/* Status colors */
+		--color-success: #30D158;
+		--color-success-light: #1A2E1A;
+		--color-success-dark: #0D1A0D;
+		--color-error: #FF453A;
+		--color-error-light: #2E1A1A;
+		--color-error-dark: #1A0D0D;
+		--color-warning: #FF9F0A;
+		--color-warning-light: #2E1A0D;
+		--color-warning-dark: #1A0D06;
+		--color-info: #5E5CE6;
+		--color-info-light: #1A1A2E;
+		--color-info-dark: #0D0D1A;
+
+		/* Overlay colors */
+		--color-overlay: rgba(0, 0, 0, 0.7);
+		--color-overlay-light: rgba(0, 0, 0, 0.4);
+
+		/* Input colors */
+		--color-input-background: #1C1C1E;
+		--color-input-border: #38383A;
+		--color-input-placeholder: #8E8E93;
+
+		/* Tab colors */
+		--color-tab-bar: #1C1C1E;
+		--color-tab-bar-border: #38383A;
+		--color-tab-active: #0A84FF;
+		--color-tab-inactive: #8E8E93;
+		--color-tab-label: #EBEBF5;
+		--color-tab-label-active: #0A84FF;
+
+		/* Shadows */
+		--shadow-small: 0 2px 3px rgba(0, 0, 0, 0.3);
+		--shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.4);
+		--shadow-large: 0 6px 8px rgba(0, 0, 0, 0.5);
+	}
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: var(--font-family-regular);
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-md);
+	color: var(--color-text);
+	background-color: var(--color-background);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	min-height: 100vh;
+}
+
+a {
+	color: var(--color-primary);
+	text-decoration: none;
+	transition: color var(--timing-fast) ease;
+}
+
+a:hover {
+	color: var(--color-primary-dark);
+	text-decoration: underline;
+}
+
+button {
+	font-family: inherit;
+	font-size: inherit;
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+input {
+	font-family: inherit;
+	font-size: inherit;
+}
+

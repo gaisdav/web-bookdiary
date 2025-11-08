@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-
-  $: currentPath = $page.url.pathname;
 </script>
 
 <footer class="footer">

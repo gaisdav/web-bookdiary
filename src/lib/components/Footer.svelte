@@ -1,49 +1,42 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	
-	$: currentPath = $page.url.pathname;
+  import { page } from "$app/stores";
+
+  $: currentPath = $page.url.pathname;
 </script>
 
 <footer class="footer">
-	{#if currentPath !== '/'}
-		<a href="/" class="footer-link">Home</a>
-		<span class="separator">|</span>
-	{/if}
-	{#if currentPath !== '/privacy-policy'}
-		<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-		<span class="separator">|</span>
-	{/if}
-	{#if currentPath !== '/contacts'}
-		<a href="/contacts" class="footer-link">Contacts</a>
-	{/if}
+  <a href="/" class="footer-link">Home</a>
+  <span class="separator">|</span>
+  <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+  <span class="separator">|</span>
+  <a href="/contacts" class="footer-link">Contacts</a>
 </footer>
 
 <style>
-	.footer {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: var(--spacing-lg);
-		margin-top: var(--spacing-xxl);
-		padding-top: var(--spacing-md);
-		border-top: 1px solid var(--color-border-light);
-		font-size: var(--font-size-sm);
-	}
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border-light);
+    font-size: var(--font-size-sm);
+  }
 
-	.footer-link {
-		color: var(--color-text-secondary);
-		text-decoration: none;
-		font-weight: 500;
-		transition: color var(--timing-fast) ease;
-	}
+  .footer-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--timing-fast) ease;
+  }
 
-	.footer-link:hover {
-		color: var(--color-primary);
-		text-decoration: underline;
-	}
+  .footer-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
 
-	.separator {
-		color: var(--color-text-tertiary);
-	}
+  .separator {
+    color: var(--color-text-tertiary);
+  }
 </style>
-

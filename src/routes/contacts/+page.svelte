@@ -1,28 +1,30 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import { PUBLIC_SUPPORT_EMAIL } from "$env/static/public";
+  import { _ } from 'svelte-i18n';
+  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 </script>
 
 <svelte:head>
-  <title>Contacts - BookDiary Support</title>
-  <meta name="description" content="Contact BookDiary support" />
+  <title>{$_('contacts.title')}</title>
+  <meta name="description" content={$_('contacts.description')} />
 </svelte:head>
 
 <div class="container">
+  <div class="language-switcher-container">
+    <LanguageSwitcher />
+  </div>
   <div class="card">
-    <h1>Contact Us</h1>
-    <p class="subtitle">We're here to help with your BookDiary journey.</p>
+    <h1>{$_('contacts.heading')}</h1>
+    <p class="subtitle">{$_('contacts.subtitle')}</p>
 
     <p>
-      If you have any questions, feedback, or need technical support regarding
-      the BookDiary application, please don't hesitate to reach out. We aim to
-      respond to all inquiries as quickly as possible.
+      {$_('contacts.descriptionText')}
     </p>
 
     <div class="contact-info">
       <p>
-        For all support and general questions, please use the following email
-        address:
+        {$_('contacts.emailLabel')}
       </p>
 
       <a href="mailto:{PUBLIC_SUPPORT_EMAIL}" class="contact-link">
@@ -40,6 +42,12 @@
     margin: 0 auto;
     padding: var(--spacing-xxl) var(--spacing-md);
     text-align: center;
+  }
+
+  .language-switcher-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-md);
   }
 
   .card {

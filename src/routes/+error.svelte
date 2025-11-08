@@ -2,30 +2,34 @@
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
   import Footer from "$lib/components/Footer.svelte";
+  import { _ } from 'svelte-i18n';
+  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 
   const is404 = $page.status === 404;
 </script>
 
 <svelte:head>
-  <title>{is404 ? "404 - Page Not Found" : "Error"} - BookDiary</title>
+  <title>{is404 ? $_('error.404Title') : $_('error.errorTitle')} - BookDiary</title>
   <meta name="description" content="Page Not Found" />
 </svelte:head>
 
 <div class="container">
+  <div class="language-switcher-container">
+    <LanguageSwitcher />
+  </div>
   <div class="card">
     {#if is404}
-      <h1 class="error-code">4📚4</h1>
-      <p class="subtitle">Page Not Found</p>
+      <h1 class="error-code">{$_('error.404Heading')}</h1>
+      <p class="subtitle">{$_('error.404Subtitle')}</p>
       <p>
-        Sorry, the page you're looking for doesn't exist. It may have been moved
-        or deleted.
+        {$_('error.404Text')}
       </p>
-      <a href="/" class="home-link">Return to Home Page</a>
+      <a href="/" class="home-link">{$_('error.returnHome')}</a>
     {:else}
-      <h1 class="error-code">Error</h1>
-      <p class="subtitle">An Error Occurred</p>
-      <p>Sorry, an error occurred. Please try again later.</p>
-      <a href="/" class="home-link">Return to Home Page</a>
+      <h1 class="error-code">{$_('error.errorTitle')}</h1>
+      <p class="subtitle">{$_('error.errorSubtitle')}</p>
+      <p>{$_('error.errorText')}</p>
+      <a href="/" class="home-link">{$_('error.returnHome')}</a>
     {/if}
   </div>
 
@@ -38,6 +42,12 @@
     margin: 0 auto;
     padding: var(--spacing-xxl) var(--spacing-md);
     text-align: center;
+  }
+
+  .language-switcher-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-md);
   }
 
   .card {

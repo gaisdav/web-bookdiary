@@ -1,54 +1,44 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import { PUBLIC_SUPPORT_EMAIL } from "$env/static/public";
+  import { _ } from 'svelte-i18n';
+  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 </script>
 
 <svelte:head>
-  <title>Privacy Policy - BookDiary</title>
-  <meta name="description" content="BookDiary privacy policy" />
+  <title>{$_('privacy.title')}</title>
+  <meta name="description" content={$_('privacy.description')} />
 </svelte:head>
 
 <div class="container">
-  <h1>Privacy Policy for BookDiary</h1>
+  <div class="language-switcher-container">
+    <LanguageSwitcher />
+  </div>
+  <h1>{$_('privacy.heading')}</h1>
 
-  <h2>1. Data Collection and Usage</h2>
+  <h2>{$_('privacy.section1Title')}</h2>
   <p>
-    BookDiary <strong>does not collect personal information</strong> except for
-    login credentials (such as email) and the
-    <strong>user's chosen name</strong>
-    (Name/Nickname) required for authentication using Supabase. This information
-    is <strong>stored securely</strong> and used solely for user identification and
-    account management.
+    {@html $_('privacy.section1Text')}
   </p>
 
-  <h2>2. Data Security and Sharing</h2>
+  <h2>{$_('privacy.section2Title')}</h2>
   <p>
-    No sensitive or financial data is collected. Data is used only for providing
-    the core functionality of the app, such as tracking reading progress and
-    managing your book diary. Your data is <strong
-      >not shared, sold, or rented</strong
-    > to third parties for any reason.
+    {@html $_('privacy.section2Text')}
   </p>
 
-  <h2>3. Advertising and Analytics</h2>
+  <h2>{$_('privacy.section3Title')}</h2>
   <p>
-    We do not use your data for advertising, and we do not engage in deep user
-    tracking or analytics beyond basic app performance monitoring.
+    {$_('privacy.section3Text')}
   </p>
 
-  <h2>4. User Rights and Data Deletion</h2>
+  <h2>{$_('privacy.section4Title')}</h2>
   <p>
-    Users have the right to delete their personal data. You can <strong
-      >permanently delete your account and all associated data</strong
-    >
-    (including your reading history and notes) at any time directly
-    <strong>within the application settings</strong>. Once initiated, account
-    deletion is immediate and irreversible.
+    {@html $_('privacy.section4Text')}
   </p>
 
-  <h2>5. Contact Information</h2>
+  <h2>{$_('privacy.section5Title')}</h2>
   <p>
-    If you have questions about this policy, please contact us at: <a
+    {$_('privacy.section5Text')} <a
       href="mailto:{PUBLIC_SUPPORT_EMAIL}">{PUBLIC_SUPPORT_EMAIL}</a
     >.
   </p>
@@ -61,6 +51,12 @@
     max-width: 800px;
     margin: 0 auto;
     padding: var(--spacing-xxl) var(--spacing-md);
+  }
+
+  .language-switcher-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-md);
   }
 
   h1 {

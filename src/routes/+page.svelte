@@ -1,23 +1,28 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
+	import { _ } from 'svelte-i18n';
+	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 </script>
 
 <svelte:head>
-	<title>BookDiary - Your Reading Companion</title>
-	<meta name="description" content="Track your reading journey with BookDiary" />
+	<title>{$_('home.title')}</title>
+	<meta name="description" content={$_('home.description')} />
 </svelte:head>
 
 <div class="container">
+	<div class="language-switcher-container">
+		<LanguageSwitcher />
+	</div>
 	<div class="card">
-		<h1>BookDiary</h1>
-		<p class="subtitle">Your Personal Reading Companion 📚</p>
+		<h1>{$_('home.heading')}</h1>
+		<p class="subtitle">{$_('home.subtitle')}</p>
 
 		<p>
-			Welcome to BookDiary, your essential tool for tracking your reading journey. Our app allows you to <strong>log books you've read</strong>, monitor your reading progress, and maintain a thoughtful diary of your literary adventures.
+			{@html $_('home.welcome1')}
 		</p>
 		
 		<p>
-			Whether you're a casual reader or a dedicated bookworm, BookDiary helps you visualize your achievements and stay motivated to reach your reading goals.
+			{$_('home.welcome2')}
 		</p>
 	</div>
 	
@@ -30,6 +35,12 @@
 		margin: 0 auto;
 		padding: var(--spacing-xxl) var(--spacing-md);
 		text-align: center;
+	}
+
+	.language-switcher-container {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: var(--spacing-md);
 	}
 
 	.card {

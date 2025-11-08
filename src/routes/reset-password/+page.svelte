@@ -3,6 +3,8 @@
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
   import Footer from "$lib/components/Footer.svelte";
+  import { _, get } from 'svelte-i18n';
+  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 
   let loading = true;
   let error = "";
@@ -17,8 +19,7 @@
   onMount(() => {
     if (!browser) return;
     if (!supabase) {
-      error =
-        "Supabase is not configured. Please set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in your .env file.";
+      error = get('resetPassword.supabaseError') || '';
       loading = false;
       return;
     }
@@ -46,8 +47,7 @@
         showForm = true;
         loading = false;
       } else if (event === "INITIAL_SESSION" && !session) {
-        error =
-          "The password reset link is invalid, expired, or was already used.";
+        error = get('resetPassword.invalidLink') || '';
         loading = false;
       } else if (event === "SIGNED_IN" && session) {
         showForm = true;
@@ -62,12 +62,12 @@
     if (!browser || !supabase) return;
 
     if (password !== confirmPassword) {
-      formError = "Passwords do not match!";
+      formError = get('resetPassword.passwordMismatch') || '';
       return;
     }
 
     if (password.length < 6) {
-      formError = "Password must be at least 6 characters long.";
+      formError = get('resetPassword.passwordTooShort') || '';
       return;
     }
 
@@ -80,7 +80,7 @@
       });
 
       if (updateError) {
-        error = `Error updating password: ${updateError.message}`;
+        error = `${get('resetPassword.updateError') || ''} ${updateError.message}`;
         showForm = false;
         return;
       }
@@ -89,7 +89,7 @@
       success = true;
       showForm = false;
     } catch (err) {
-      error = "An unexpected error occurred.";
+      error = get('resetPassword.unexpectedError') || '';
       showForm = false;
     } finally {
       isSubmitting = false;
@@ -98,16 +98,19 @@
 </script>
 
 <svelte:head>
-  <title>BookDiary - Reset Password</title>
-  <meta name="description" content="Reset your BookDiary password" />
+  <title>{$_('resetPassword.title')}</title>
+  <meta name="description" content={$_('resetPassword.description')} />
 </svelte:head>
 
 <div class="container">
+  <div class="language-switcher-container">
+    <LanguageSwitcher />
+  </div>
   <div class="card">
-    <h2>Reset Your Password</h2>
+    <h2>{$_('resetPassword.heading')}</h2>
 
     {#if loading}
-      <div class="message message-info">Checking session...</div>
+      <div class="message message-info">{$_('resetPassword.checkingSession')}</div>
     {/if}
 
     {#if error}
@@ -118,7 +121,7 @@
 
     {#if showForm}
       <form on:submit|preventDefault={handleSubmit}>
-        <div class="message message-info">Enter your new password below.</div>
+        <div class="message message-info">{$_('resetPassword.enterNewPassword')}</div>
 
         {#if formError}
           <div class="message message-error">
@@ -126,7 +129,7 @@
           </div>
         {/if}
 
-        <label for="password">New Password</label>
+        <label for="password">{$_('resetPassword.newPassword')}</label>
         <input
           type="password"
           id="password"
@@ -136,7 +139,7 @@
           disabled={isSubmitting}
         />
 
-        <label for="confirm_password">Confirm Password</label>
+        <label for="confirm_password">{$_('resetPassword.confirmPassword')}</label>
         <input
           type="password"
           id="confirm_password"
@@ -147,15 +150,15 @@
         />
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Updating..." : "Set New Password"}
+          {isSubmitting ? $_('resetPassword.updating') : $_('resetPassword.setNewPassword')}
         </button>
       </form>
     {/if}
 
     {#if success}
       <div class="message message-success">
-        <p>✅ Your password has been successfully updated!</p>
-        <p>You can now close this window and log in to the BookDiary app.</p>
+        <p>{$_('resetPassword.successTitle')}</p>
+        <p>{$_('resetPassword.successText')}</p>
       </div>
     {/if}
   </div>
@@ -171,6 +174,14 @@
     align-items: center;
     min-height: 100vh;
     padding: var(--spacing-xxl) var(--spacing-md);
+  }
+
+  .language-switcher-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-md);
   }
 
   .card {

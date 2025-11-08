@@ -1,0 +1,81 @@
+{
+  "common": {
+    "home": "Home",
+    "privacyPolicy": "Privacy Policy",
+    "contacts": "Contacts"
+  },
+  "home": {
+    "title": "BookDiary - Your Reading Companion",
+    "description": "Track your reading journey with BookDiary",
+    "heading": "BookDiary",
+    "subtitle": "Your Personal Reading Companion 📚",
+    "welcome1": "Welcome to BookDiary, your essential tool for tracking your reading journey. Our app allows you to <strong>log books you've read</strong>, monitor your reading progress, and maintain a thoughtful diary of your literary adventures.",
+    "welcome2": "Whether you're a casual reader or a dedicated bookworm, BookDiary helps you visualize your achievements and stay motivated to reach your reading goals."
+  },
+  "contacts": {
+    "title": "Contacts - BookDiary Support",
+    "description": "Contact BookDiary support",
+    "heading": "Contact Us",
+    "subtitle": "We're here to help with your BookDiary journey.",
+    "descriptionText": "If you have any questions, feedback, or need technical support regarding the BookDiary application, please don't hesitate to reach out. We aim to respond to all inquiries as quickly as possible.",
+    "emailLabel": "For all support and general questions, please use the following email address:"
+  },
+  "privacy": {
+    "title": "Privacy Policy - BookDiary",
+    "description": "BookDiary privacy policy",
+    "heading": "Privacy Policy for BookDiary",
+    "section1Title": "1. Data Collection and Usage",
+    "section1Text": "BookDiary <strong>does not collect personal information</strong> except for login credentials (such as email) and the <strong>user's chosen name</strong> (Name/Nickname) required for authentication using Supabase. This information is <strong>stored securely</strong> and used solely for user identification and account management.",
+    "section2Title": "2. Data Security and Sharing",
+    "section2Text": "No sensitive or financial data is collected. Data is used only for providing the core functionality of the app, such as tracking reading progress and managing your book diary. Your data is <strong>not shared, sold, or rented</strong> to third parties for any reason.",
+    "section3Title": "3. Advertising and Analytics",
+    "section3Text": "We do not use your data for advertising, and we do not engage in deep user tracking or analytics beyond basic app performance monitoring.",
+    "section4Title": "4. User Rights and Data Deletion",
+    "section4Text": "Users have the right to delete their personal data. You can <strong>permanently delete your account and all associated data</strong> (including your reading history and notes) at any time directly <strong>within the application settings</strong>. Once initiated, account deletion is immediate and irreversible.",
+    "section5Title": "5. Contact Information",
+    "section5Text": "If you have questions about this policy, please contact us at:"
+  },
+  "error": {
+    "404Title": "404 - Page Not Found",
+    "errorTitle": "Error",
+    "404Heading": "4📚4",
+    "404Subtitle": "Page Not Found",
+    "404Text": "Sorry, the page you're looking for doesn't exist. It may have been moved or deleted.",
+    "errorSubtitle": "An Error Occurred",
+    "errorText": "Sorry, an error occurred. Please try again later.",
+    "returnHome": "Return to Home Page"
+  },
+  "emailVerified": {
+    "title": "Verification Successful - BookDiary",
+    "description": "Email verified successfully",
+    "heading": "Email Verified!",
+    "text1": "Your email address has been successfully verified.",
+    "text2": "Thank you for registering with BookDiary.",
+    "text3": "You can now log in and start exploring your personal book diary!"
+  },
+  "resetPassword": {
+    "title": "BookDiary - Reset Password",
+    "description": "Reset your BookDiary password",
+    "heading": "Reset Your Password",
+    "checkingSession": "Checking session...",
+    "supabaseError": "Supabase is not configured. Please set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in your .env file.",
+    "invalidLink": "The password reset link is invalid, expired, or was already used.",
+    "enterNewPassword": "Enter your new password below.",
+    "passwordMismatch": "Passwords do not match!",
+    "passwordTooShort": "Password must be at least 6 characters long.",
+    "updateError": "Error updating password:",
+    "unexpectedError": "An unexpected error occurred.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "updating": "Updating...",
+    "setNewPassword": "Set New Password",
+    "successTitle": "✅ Your password has been successfully updated!",
+    "successText": "You can now close this window and log in to the BookDiary app."
+  },
+  "language": {
+    "switch": "Switch Language",
+    "english": "English",
+    "russian": "Russian"
+  }
+}
+

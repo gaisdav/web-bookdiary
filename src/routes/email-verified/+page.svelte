@@ -1,25 +1,30 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
+	import { _ } from 'svelte-i18n';
+	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 </script>
 
 <svelte:head>
-	<title>Verification Successful - BookDiary</title>
-	<meta name="description" content="Email verified successfully" />
+	<title>{$_('emailVerified.title')}</title>
+	<meta name="description" content={$_('emailVerified.description')} />
 </svelte:head>
 
 <div class="container">
+	<div class="language-switcher-container">
+		<LanguageSwitcher />
+	</div>
 	<div class="card">
 		<p class="icon">✅</p>
-		<h2>Email Verified!</h2>
+		<h2>{$_('emailVerified.heading')}</h2>
 
 		<p>
-			Your email address has been successfully verified.
+			{$_('emailVerified.text1')}
 		</p>
 		<p>
-			Thank you for registering with BookDiary.
+			{$_('emailVerified.text2')}
 		</p>
 		<p>
-			You can now log in and start exploring your personal book diary!
+			{$_('emailVerified.text3')}
 		</p>
 	</div>
 	
@@ -32,6 +37,12 @@
 		margin: 0 auto;
 		padding: var(--spacing-xxl) var(--spacing-md);
 		text-align: center;
+	}
+
+	.language-switcher-container {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: var(--spacing-md);
 	}
 
 	.card {

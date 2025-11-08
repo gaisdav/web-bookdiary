@@ -262,7 +262,7 @@
 
   .message-success {
     background-color: var(--color-success-light);
-    color: var(--color-success-dark);
+    color: var(--color-success);
   }
 
   .message-success p {

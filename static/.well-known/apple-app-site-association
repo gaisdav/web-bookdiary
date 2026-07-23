@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["HF8439G9ZL.com.appbookdiary"],
+        "components": [
+          {
+            "/": "/book/*",
+            "comment": "Book screen deep links; add /user/* and /list/* in stage 3"
+          }
+        ]
+      }
+    ]
+  }
+}

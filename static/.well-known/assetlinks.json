@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.appbookdiary",
+      "sha256_cert_fingerprints": [
+        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C",
+        "8A:D4:9F:C4:25:FD:FD:C3:DB:C1:6F:5A:E2:25:70:25:3C:B5:B8:AE:E9:17:16:7A:58:87:17:52:8E:9E:5D:13"
+      ]
+    }
+  }
+]

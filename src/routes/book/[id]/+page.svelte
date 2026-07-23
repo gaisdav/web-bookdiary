@@ -1,10 +1,8 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
-	import {
-		PUBLIC_APP_STORE_URL,
-		PUBLIC_GOOGLE_PLAY_URL,
-		PUBLIC_IOS_APP_ID
-	} from '$env/static/public';
+	import { env } from '$env/dynamic/public';
+
+	const { PUBLIC_APP_STORE_URL, PUBLIC_GOOGLE_PLAY_URL, PUBLIC_IOS_APP_ID } = env;
 </script>
 
 <svelte:head>

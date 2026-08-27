@@ -6,8 +6,9 @@
         "components": [
           {
             "/": "/book/*",
-            "comment": "Book screen deep links; add /user/* and /list/* in stage 3"
-          }
+            "comment": "Book screen deep links"
+          },
+          { "/": "/list/*", "comment": "Shared list deep links" }
         ]
       }
     ]

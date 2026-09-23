@@ -8,7 +8,8 @@
             "/": "/book/*",
             "comment": "Book screen deep links"
           },
-          { "/": "/user/*/list/*", "comment": "Shared list deep links" }
+          { "/": "/user/*/list/*", "comment": "Shared list deep links" },
+          { "/": "/email-verified", "comment": "Post-signup email confirmation deep link" }
         ]
       }
     ]

@@ -1,17 +1,11 @@
 <script lang="ts">
+	import AppLinks from '$lib/components/AppLinks.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import { env } from '$env/dynamic/public';
-
-	const { PUBLIC_APP_STORE_URL, PUBLIC_GOOGLE_PLAY_URL, PUBLIC_IOS_APP_ID } = env;
 </script>
 
 <svelte:head>
 	<title>Open in BookDiary</title>
 	<meta name="description" content="Continue in the BookDiary app to view this list." />
-
-	{#if PUBLIC_IOS_APP_ID}
-		<meta name="apple-itunes-app" content="app-id={PUBLIC_IOS_APP_ID}" />
-	{/if}
 </svelte:head>
 
 <div class="container">
@@ -24,14 +18,7 @@
 			reading diary.
 		</p>
 
-		<div class="store-links">
-			{#if PUBLIC_APP_STORE_URL}
-				<a href={PUBLIC_APP_STORE_URL} class="store-link">Download on the App Store</a>
-			{/if}
-			{#if PUBLIC_GOOGLE_PLAY_URL}
-				<a href={PUBLIC_GOOGLE_PLAY_URL} class="store-link">Get it on Google Play</a>
-			{/if}
-		</div>
+		<AppLinks />
 	</div>
 
 	<Footer />
@@ -68,27 +55,5 @@
 	p {
 		margin-bottom: var(--spacing-md);
 		line-height: var(--line-height-lg);
-	}
-
-	.store-links {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-md);
-		margin-top: var(--spacing-lg);
-	}
-
-	.store-link {
-		display: inline-block;
-		padding: var(--spacing-sm) var(--spacing-lg);
-		border-radius: var(--radius-md);
-		background-color: var(--color-primary);
-		color: #fff;
-		text-decoration: none;
-		font-weight: 600;
-		transition: background-color var(--timing-fast) ease;
-	}
-
-	.store-link:hover {
-		background-color: var(--color-primary-dark);
 	}
 </style>

@@ -1,4 +1,21 @@
 <script lang="ts">
+  // Near-identical copy of ../reset-password/+page.svelte, deliberately not
+  // shared with it: the mechanics are the same (see below), but the words
+  // are different enough — "reset" implies a password that already existed
+  // — that reusing one route for both would confuse whichever case isn't
+  // the one currently showing.
+  //
+  // This page is where a BookDiary guest (anonymous) session finishes
+  // becoming a real account (app's docs/PLAN_GUEST_MODE.md, section 7.3).
+  // The app calls supabase.auth.updateUser({ email, data }) on the guest's
+  // still-active anonymous session; GoTrue emails a confirmation link for
+  // the new address with this page as its redirect target. Clicking it is
+  // an "email_change" verification, not "recovery" — but GoTrue's own
+  // verify endpoint issues a session with tokens in the redirect URL the
+  // same way for both (confirmed from its source, not assumed), so the
+  // plain SIGNED_IN branch below — already here for reset-password's own
+  // "recovery link opened in a fresh browser" case — is what actually
+  // picks this up, not PASSWORD_RECOVERY.
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
@@ -56,7 +73,7 @@
         loading = false;
       } else if (event === "INITIAL_SESSION" && !session) {
         error =
-          "The password reset link is invalid, expired, or was already used.";
+          "The confirmation link is invalid, expired, or was already used.";
         loading = false;
       }
     });
@@ -87,17 +104,24 @@
       });
 
       if (updateError) {
-        // Leave the form up — the reset link is already consumed at this
-        // point (the session it produced is what made the form appear at
-        // all), so hiding the form here for a network hiccup or a
+        // Leave the form up — the confirmation link is already consumed at
+        // this point (the session it produced is what made the form appear
+        // at all), so hiding the form here for a network hiccup or a
         // server-side password rule stricter than our 6-character check
-        // would strand the user with no way to retry without requesting a
-        // whole new reset link.
-        error = `Error updating password: ${updateError.message}`;
+        // would strand the user with a confirmed email and no way to set a
+        // password without requesting a whole new link.
+        error = `Error setting password: ${updateError.message}`;
         return;
       }
 
-      await supabase.auth.signOut();
+      // scope: 'local' — the default ('global') revokes the refresh token
+      // for every session on this account, not just this browser tab. This
+      // account's mobile app is very likely still signed in as the same
+      // (now no-longer-anonymous) user; a bare signOut() here would force
+      // it to log out the moment this page finishes, instead of the
+      // "nothing to do, it just picks up the real account" the app side
+      // was built to expect.
+      await supabase.auth.signOut({ scope: "local" });
       success = true;
       showForm = false;
     } catch (err) {
@@ -109,13 +133,13 @@
 </script>
 
 <svelte:head>
-  <title>BookDiary - Reset Password</title>
-  <meta name="description" content="Reset your BookDiary password" />
+  <title>BookDiary - Complete Your Account</title>
+  <meta name="description" content="Finish creating your BookDiary account" />
 </svelte:head>
 
 <div class="container">
   <div class="card">
-    <h2>Reset Your Password</h2>
+    <h2>Complete Your Account</h2>
 
     {#if loading}
       <div class="message message-info">Checking session...</div>
@@ -129,7 +153,9 @@
 
     {#if showForm}
       <form on:submit|preventDefault={handleSubmit}>
-        <div class="message message-info">Enter your new password below.</div>
+        <div class="message message-info">
+          Set a password to finish creating your account.
+        </div>
 
         {#if formError}
           <div class="message message-error">
@@ -137,7 +163,7 @@
           </div>
         {/if}
 
-        <label for="password">New Password</label>
+        <label for="password">Password</label>
         <input
           type="password"
           id="password"
@@ -158,15 +184,18 @@
         />
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Updating..." : "Set New Password"}
+          {isSubmitting ? "Setting..." : "Set Password"}
         </button>
       </form>
     {/if}
 
     {#if success}
       <div class="message message-success">
-        <p>✅ Your password has been successfully updated!</p>
-        <p>You can now close this window and log in to the BookDiary app.</p>
+        <p>✅ Your account is ready!</p>
+        <p>
+          You can now close this window and log in to the BookDiary app with
+          your email and password.
+        </p>
       </div>
     {/if}
   </div>

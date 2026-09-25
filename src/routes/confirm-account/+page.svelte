@@ -59,15 +59,21 @@
     const {
       data: { subscription: authSubscription },
     } = supabase.auth.onAuthStateChange((event: string, session: any) => {
-      if (event === "PASSWORD_RECOVERY") {
+      // INITIAL_SESSION always fires once for a fresh subscriber, whether
+      // or not a session exists — it is not itself an error signal. A
+      // session can already be there (a reload after Supabase already
+      // processed the link's tokens, or a subscribe that lands just after
+      // detectSessionInUrl finishes) and used to fall through here with
+      // no branch matching, leaving `loading` stuck true forever.
+      if (
+        event === "PASSWORD_RECOVERY" ||
+        ((event === "INITIAL_SESSION" || event === "SIGNED_IN") && session)
+      ) {
         showForm = true;
         loading = false;
       } else if (event === "INITIAL_SESSION" && !session) {
         error =
           "The confirmation link is invalid, expired, or was already used.";
-        loading = false;
-      } else if (event === "SIGNED_IN" && session) {
-        showForm = true;
         loading = false;
       }
     });
@@ -89,6 +95,7 @@
     }
 
     formError = "";
+    error = "";
     isSubmitting = true;
 
     try {
@@ -97,17 +104,28 @@
       });
 
       if (updateError) {
+        // Leave the form up — the confirmation link is already consumed at
+        // this point (the session it produced is what made the form appear
+        // at all), so hiding the form here for a network hiccup or a
+        // server-side password rule stricter than our 6-character check
+        // would strand the user with a confirmed email and no way to set a
+        // password without requesting a whole new link.
         error = `Error setting password: ${updateError.message}`;
-        showForm = false;
         return;
       }
 
-      await supabase.auth.signOut();
+      // scope: 'local' — the default ('global') revokes the refresh token
+      // for every session on this account, not just this browser tab. This
+      // account's mobile app is very likely still signed in as the same
+      // (now no-longer-anonymous) user; a bare signOut() here would force
+      // it to log out the moment this page finishes, instead of the
+      // "nothing to do, it just picks up the real account" the app side
+      // was built to expect.
+      await supabase.auth.signOut({ scope: "local" });
       success = true;
       showForm = false;
     } catch (err) {
       error = "An unexpected error occurred.";
-      showForm = false;
     } finally {
       isSubmitting = false;
     }

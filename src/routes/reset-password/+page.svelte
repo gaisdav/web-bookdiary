@@ -42,15 +42,21 @@
     const {
       data: { subscription: authSubscription },
     } = supabase.auth.onAuthStateChange((event: string, session: any) => {
-      if (event === "PASSWORD_RECOVERY") {
+      // INITIAL_SESSION always fires once for a fresh subscriber, whether
+      // or not a session exists — it is not itself an error signal. A
+      // session can already be there (a reload after Supabase already
+      // processed the link's tokens, or a subscribe that lands just after
+      // detectSessionInUrl finishes) and used to fall through here with
+      // no branch matching, leaving `loading` stuck true forever.
+      if (
+        event === "PASSWORD_RECOVERY" ||
+        ((event === "INITIAL_SESSION" || event === "SIGNED_IN") && session)
+      ) {
         showForm = true;
         loading = false;
       } else if (event === "INITIAL_SESSION" && !session) {
         error =
           "The password reset link is invalid, expired, or was already used.";
-        loading = false;
-      } else if (event === "SIGNED_IN" && session) {
-        showForm = true;
         loading = false;
       }
     });
@@ -72,6 +78,7 @@
     }
 
     formError = "";
+    error = "";
     isSubmitting = true;
 
     try {
@@ -80,8 +87,13 @@
       });
 
       if (updateError) {
+        // Leave the form up — the reset link is already consumed at this
+        // point (the session it produced is what made the form appear at
+        // all), so hiding the form here for a network hiccup or a
+        // server-side password rule stricter than our 6-character check
+        // would strand the user with no way to retry without requesting a
+        // whole new reset link.
         error = `Error updating password: ${updateError.message}`;
-        showForm = false;
         return;
       }
 
@@ -90,7 +102,6 @@
       showForm = false;
     } catch (err) {
       error = "An unexpected error occurred.";
-      showForm = false;
     } finally {
       isSubmitting = false;
     }

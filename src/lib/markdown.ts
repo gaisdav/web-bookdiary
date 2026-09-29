@@ -12,6 +12,10 @@ const renderInline = (value: string) =>
       /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)]+)\)/g,
       '<a href="$2" rel="noreferrer">$1</a>'
     )
+    .replace(
+      /`([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})`/g,
+      '<a href="mailto:$1">$1</a>'
+    )
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/\*([^*]+)\*/g, "<em>$1</em>");

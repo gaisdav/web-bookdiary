@@ -1,8 +1,7 @@
 # Readimus Community Guidelines
 
-Status: draft, not for publication  
-Effective date: TBD  
-Last updated: TBD
+Effective date: 5 October 2026
+Last updated: 5 October 2026
 
 Readimus is a space for readers to keep a personal library, publish reviews,
 discuss books, and share their reading activity. We want it to be an
@@ -13,7 +12,7 @@ These Guidelines apply to all content that users make available to others,
 including profiles, avatars, lists, reviews, comments, book information, and
 reading activity.
 
-When creating an account, you must accept our Terms of Use and these
+When creating an account, you must accept our [Terms of Use](/terms) and these
 Guidelines. By publishing content or interacting with other users, you agree
 to follow them.
 
@@ -130,7 +129,7 @@ an immediate threat to someone's life or safety, contact your local emergency
 services first.
 
 Reports of potential copyright infringement are handled under our separate
-Copyright / Takedown Policy.
+[Copyright / Takedown Policy](/copyright).
 
 ## 9. Moderation and enforcement
 
@@ -143,7 +142,7 @@ a violation. Depending on the situation, Readimus may:
 - temporarily restrict certain features;
 - temporarily suspend or permanently terminate an account;
 - retain information needed to investigate a violation or comply with legal
-  obligations, in accordance with our Privacy Policy and applicable law;
+  obligations, in accordance with our [Privacy Policy](/privacy) and applicable law;
 - contact the relevant authorities when required by law or necessary to
   protect people's safety.
 
@@ -170,4 +169,3 @@ legal requirements change. The current version and the date it was last
 updated will be published on the Readimus website.
 
 Material changes will take effect on the date stated in the updated version.
-

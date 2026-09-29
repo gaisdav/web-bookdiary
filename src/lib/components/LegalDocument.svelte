@@ -6,11 +6,8 @@
   export let pageTitle: string;
   export let description: string;
   export let english: string;
-  export let russian: string;
 
-  let language: "en" | "ru" = "en";
-  $: document = language === "en" ? english : russian;
-  $: html = renderMarkdown(document);
+  $: html = renderMarkdown(english);
 </script>
 
 <svelte:head>
@@ -23,18 +20,9 @@
 <main class="legal-shell shell">
   <div class="legal-toolbar">
     <a class="back-link" href="/">← Readimus</a>
-    <div class="language-switch" aria-label="Document language">
-      <button class:active={language === "en"} on:click={() => (language = "en")}>English</button>
-      <button class:active={language === "ru"} on:click={() => (language = "ru")}>Русский</button>
-    </div>
   </div>
 
-  <aside class="draft-note">
-    <strong>Draft document.</strong>
-    Operator details, dates, and remaining placeholders must be completed before publication.
-  </aside>
-
-  <article class="legal-content" lang={language}>
+  <article class="legal-content" lang="en">
     {@html html}
   </article>
 </main>
@@ -46,11 +34,6 @@
   .legal-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 32px; }
   .back-link { color: var(--text-muted); font-size: 0.9rem; font-weight: 700; text-decoration: none; }
   .back-link:hover { color: var(--primary-dark); }
-  .language-switch { display: inline-flex; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: white; }
-  .language-switch button { border: 0; border-radius: 999px; padding: 8px 14px; background: transparent; color: var(--text-muted); font: inherit; font-size: 0.83rem; font-weight: 700; cursor: pointer; }
-  .language-switch button.active { background: var(--text); color: white; }
-  .draft-note { margin-bottom: 30px; padding: 15px 18px; border: 1px solid #f0c36d; border-radius: 14px; background: #fff7df; color: #6e4b09; font-size: 0.9rem; line-height: 1.55; }
-  .draft-note strong { margin-right: 4px; }
   .legal-content { padding: clamp(28px, 7vw, 74px); border: 1px solid var(--border); border-radius: 28px; background: white; box-shadow: var(--shadow-sm); }
   .legal-content :global(h1) { margin: 0 0 34px; font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 4.4rem); line-height: 0.98; letter-spacing: -0.055em; }
   .legal-content :global(h2) { margin: 54px 0 18px; padding-top: 8px; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; letter-spacing: -0.03em; }

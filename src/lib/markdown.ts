@@ -8,7 +8,10 @@ const escapeHtml = (value: string) =>
 
 const renderInline = (value: string) =>
   escapeHtml(value)
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" rel="noreferrer">$1</a>')
+    .replace(
+      /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)]+)\)/g,
+      '<a href="$2" rel="noreferrer">$1</a>'
+    )
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/\*([^*]+)\*/g, "<em>$1</em>");

@@ -327,7 +327,7 @@
     display: grid;
     grid-template-columns: minmax(0, 0.82fr) minmax(440px, 1.18fr);
     align-items: center;
-    gap: clamp(60px, 10vw, 140px);
+    gap: clamp(96px, 12vw, 170px);
   }
 
   .story-copy {
@@ -340,7 +340,7 @@
     max-width: 520px;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.8rem, 5.1vw, 4.8rem);
+    font-size: clamp(2.8rem, 4.6vw, 4.4rem);
     line-height: 0.96;
     letter-spacing: -0.06em;
     text-wrap: balance;

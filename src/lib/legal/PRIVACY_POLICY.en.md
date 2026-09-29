@@ -1,8 +1,7 @@
 # Readimus Privacy Policy
 
-Status: draft, not for publication  
-Effective date: TBD  
-Last updated: TBD
+Effective date: 5 October 2026
+Last updated: 5 October 2026
 
 This Privacy Policy explains what personal data Readimus collects and uses, why
 we process it, who may receive it, and what rights users have.
@@ -12,14 +11,11 @@ This Policy applies to the Readimus application, website, and other services
 
 ## 1. Who Is Responsible for Your Data
 
-The controller of your personal data is `[FULL LEGAL NAME]`, an individual
+The controller of your personal data is Gaisar Davletkildin, an individual
 operating Readimus from Serbia (the “Operator,” “we,” “us,” or “our”).
 
 For questions about personal data or to exercise your rights, email
 `privacy@readimus.com`.
-
-Additional information about the Operator and a postal address: `[TBD AFTER
-REVIEWING APPLICABLE REQUIREMENTS]`.
 
 ## 2. Data We Process
 
@@ -143,7 +139,7 @@ Where applicable law requires us to identify a legal basis, we rely on one or
 more of the following:
 
 - **performance of a contract** — to create your account and provide features
-  you request under the Terms of Use;
+  you request under the [Terms of Use](/terms);
 - **legitimate interests** — to maintain security, prevent abuse, moderate the
   community, improve the reliability of the Service, and protect our legal
   rights, provided those interests are not overridden by your rights and
@@ -198,8 +194,8 @@ Policy with the following categories of recipients:
   covers;
 - **Vercel** — temporary hosting for the website and account-related pages;
   this Policy will be updated if the hosting provider changes;
-- **email provider `[TBD]`** — delivery of service messages and handling of
-  communications;
+- **email delivery and communications providers** — delivery of service
+  messages and handling of communications;
 - professional advisers and contractors who need access to provide services and
   are required to maintain confidentiality;
 - public authorities, courts, and other persons where disclosure is required by
@@ -218,14 +214,12 @@ profile data or User Content for application distribution.
 
 Readimus is available to users worldwide and is operated from Serbia. Our
 service providers and their subprocessors may process data in other countries.
-The primary region of the Supabase project is `[TBD]`.
+The primary region of the Supabase project is Central Europe (Frankfurt,
+Germany).
 
 Where applicable law requires safeguards for international data transfers, we
 use legally recognized mechanisms, such as an adequacy decision, standard
 contractual clauses, or other permitted safeguards.
-
-Before this Policy is published, the list of providers, processing regions, and
-applicable transfer mechanisms must be confirmed.
 
 ## 11. How Long We Retain Data
 
@@ -242,9 +236,11 @@ security and legal requirements into account.
   request is closed;
 - reports and moderation records are normally retained for up to 3 years after
   the report is closed;
-- technical log retention periods: `[TBD AFTER REVIEWING SUPABASE AND THE WEB
-HOSTING PROVIDER]`; and
-- backup deletion periods: `[TBD AFTER REVIEWING SUPABASE]`.
+- technical logs are retained only for as long as reasonably necessary to
+  maintain security, investigate incidents, and diagnose technical problems;
+  and
+- data remaining in backups is deleted through the normal backup rotation
+  process within 7 days.
 
 Some data may be retained for longer where necessary to comply with a legal
 obligation, maintain security, prevent repeated violations, resolve a dispute,
@@ -267,8 +263,8 @@ If an individual file is not removed automatically because of a technical
 error, we may remove it after we discover the issue or receive a request from a
 user.
 
-An external webpage for requesting account deletion will also be provided for
-Google Play: `[URL TBD]`.
+You can also request account and associated data deletion through our external
+[Account deletion](/delete-account) page.
 
 ## 13. Your Rights
 
@@ -335,4 +331,3 @@ For questions about this Policy or personal data, email
 `privacy@readimus.com`.
 
 For general questions about Readimus, email `support@readimus.com`.
-

@@ -1,13 +1,12 @@
 # Readimus Terms of Use
 
-Status: draft, not for publication  
-Effective date: TBD  
-Last updated: TBD
+Effective date: 5 October 2026
+Last updated: 5 October 2026
 
 These Terms of Use (the “Terms”) govern access to the Readimus application,
 website, and other services (together, “Readimus” or the “Service”).
 
-Readimus is operated by `[FULL LEGAL NAME]`, an individual operating the Service
+Readimus is operated by Gaisar Davletkildin, an individual operating the Service
 from Serbia (the “Operator,” “we,” “us,” or “our”). You can contact us at
 `support@readimus.com`.
 
@@ -45,7 +44,7 @@ may view available materials but may not publish content or take other actions
 that are available only to holders of full accounts.
 
 Guest access may use a technical anonymous account that is necessary for the
-application to function. Our Privacy Policy explains how related data is
+application to function. Our [Privacy Policy](/privacy) explains how related data is
 processed.
 
 We may change the features available to guests or discontinue guest access.
@@ -53,7 +52,7 @@ We may change the features available to guests or discontinue guest access.
 ## 4. Your Account and Its Security
 
 To use all Readimus features, you must create an account and accept these Terms
-and the Community Guidelines.
+and the [Community Guidelines](/community-guidelines).
 
 You agree to:
 
@@ -73,7 +72,7 @@ connection with a person or organization.
 
 ## 5. Community Guidelines
 
-The Community Guidelines form part of these Terms. They establish rules for
+The [Community Guidelines](/community-guidelines) form part of these Terms. They establish rules for
 publishing content, communicating, promoting books, posting reviews, handling
 spoilers, and other conduct within the community.
 
@@ -136,9 +135,10 @@ false information or upload descriptions, covers, images, full texts, or
 substantial excerpts from books without the necessary rights or another lawful
 basis.
 
-We may review, correct, merge, reject, or remove book information to maintain
-catalog quality and respect third-party rights. We do not guarantee that every
-suggested change will be accepted or retained.
+We may review, edit, correct, supplement, merge, reject, replace, or remove book
+titles, author names, descriptions, covers, bibliographic metadata, and other
+catalog information to maintain catalog quality and respect third-party rights.
+We do not guarantee that every suggested change will be accepted or retained.
 
 ## 9. Acceptable Use
 
@@ -216,7 +216,8 @@ failures, or circumstances beyond our reasonable control.
 
 You may stop using Readimus and delete your account through the application
 settings. The deletion process and any limited retention of certain data are
-described in the Privacy Policy.
+described in the [Privacy Policy](/privacy). You can also review the external
+[Account deletion](/delete-account) page.
 
 We may restrict or terminate your access if you materially or repeatedly violate
 these Terms, the Community Guidelines, or the law, or if you pose a threat to
@@ -293,8 +294,9 @@ If any provision of these Terms is found to be invalid or unenforceable, the
 remaining provisions will continue in effect. Our failure to enforce any
 provision does not waive our right to enforce it later.
 
-These Terms, the Community Guidelines, the Privacy Policy, and applicable app
-store rules collectively govern your use of Readimus. If they conflict,
+These Terms, the [Community Guidelines](/community-guidelines), the
+[Privacy Policy](/privacy), and applicable app store rules collectively govern
+your use of Readimus. If they conflict,
 mandatory provisions of applicable law prevail.
 
 ## 21. Contact Us
@@ -304,5 +306,5 @@ For questions about Readimus or these Terms, email `support@readimus.com`.
 For questions about personal data, email `privacy@readimus.com`.
 
 Reports of potential copyright infringement are handled in accordance with the
-Copyright / Takedown Policy at `copyright@readimus.com`.
-
+[Copyright / Takedown Policy](/copyright). You can contact us at
+`copyright@readimus.com`.

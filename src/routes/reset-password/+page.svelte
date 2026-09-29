@@ -109,8 +109,8 @@
 </script>
 
 <svelte:head>
-  <title>BookDiary - Reset Password</title>
-  <meta name="description" content="Reset your BookDiary password" />
+  <title>Readimus - Reset Password</title>
+  <meta name="description" content="Reset your Readimus password" />
 </svelte:head>
 
 <div class="container">
@@ -166,7 +166,7 @@
     {#if success}
       <div class="message message-success">
         <p>✅ Your password has been successfully updated!</p>
-        <p>You can now close this window and log in to the BookDiary app.</p>
+        <p>You can now close this window and log in to the Readimus app.</p>
       </div>
     {/if}
   </div>

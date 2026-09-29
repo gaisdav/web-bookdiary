@@ -8,7 +8,10 @@
             "/": "/book/*",
             "comment": "Book screen deep links"
           },
-          { "/": "/user/*/list/*", "comment": "Shared list deep links" }
+          {
+            "/": "/user/*",
+            "comment": "Profiles and the list links nested under them (/user/<id>/list/<id>)"
+          }
         ]
       }
     ]

@@ -6,8 +6,8 @@
 </script>
 
 <svelte:head>
-	<title>Open in BookDiary</title>
-	<meta name="description" content="Continue in the BookDiary app to view this list." />
+	<title>Open in Readimus</title>
+	<meta name="description" content="Continue in the Readimus app to view this list." />
 
 	{#if PUBLIC_IOS_APP_ID}
 		<meta name="apple-itunes-app" content="app-id={PUBLIC_IOS_APP_ID}" />
@@ -16,8 +16,8 @@
 
 <div class="container">
 	<div class="card">
-		<h1>Open in BookDiary</h1>
-		<p class="subtitle">This link opens a shared list in the BookDiary app 📚</p>
+		<h1>Open in Readimus</h1>
+		<p class="subtitle">This link opens a shared list in the Readimus app 📚</p>
 
 		<p>
 			Get the app to view this list, track your reading progress, and keep your personal

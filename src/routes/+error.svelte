@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>{is404 ? "404 - Page Not Found" : "Error"} - BookDiary</title>
+  <title>{is404 ? "404 - Page Not Found" : "Error"} - Readimus</title>
   <meta name="description" content="Page Not Found" />
 </svelte:head>
 

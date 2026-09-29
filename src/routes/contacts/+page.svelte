@@ -1,21 +1,22 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
-  import { PUBLIC_SUPPORT_EMAIL } from "$env/static/public";
+
+  const supportEmail = "support@readimus.com";
 </script>
 
 <svelte:head>
-  <title>Contacts - BookDiary Support</title>
-  <meta name="description" content="Contact BookDiary support" />
+  <title>Contacts - Readimus Support</title>
+  <meta name="description" content="Contact Readimus support" />
 </svelte:head>
 
 <div class="container">
   <div class="card">
     <h1>Contact Us</h1>
-    <p class="subtitle">We're here to help with your BookDiary journey.</p>
+    <p class="subtitle">We're here to help with your Readimus journey.</p>
 
     <p>
       If you have any questions, feedback, or need technical support regarding
-      the BookDiary application, please don't hesitate to reach out. We aim to
+      the Readimus application, please don't hesitate to reach out. We aim to
       respond to all inquiries as quickly as possible.
     </p>
 
@@ -25,8 +26,8 @@
         address:
       </p>
 
-      <a href="mailto:{PUBLIC_SUPPORT_EMAIL}" class="contact-link">
-        {PUBLIC_SUPPORT_EMAIL}
+      <a href="mailto:{supportEmail}" class="contact-link">
+        {supportEmail}
       </a>
     </div>
   </div>

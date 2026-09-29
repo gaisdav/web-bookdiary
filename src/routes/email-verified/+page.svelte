@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Verification Successful - BookDiary</title>
+	<title>Verification Successful - Readimus</title>
 	<meta name="description" content="Email verified successfully" />
 </svelte:head>
 
@@ -16,7 +16,7 @@
 			Your email address has been successfully verified.
 		</p>
 		<p>
-			Thank you for registering with BookDiary.
+			Thank you for registering with Readimus.
 		</p>
 		<p>
 			You can now log in and start exploring your personal book diary!

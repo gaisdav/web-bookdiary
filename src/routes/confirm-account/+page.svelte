@@ -5,7 +5,7 @@
   // — that reusing one route for both would confuse whichever case isn't
   // the one currently showing.
   //
-  // This page is where a BookDiary guest (anonymous) session finishes
+  // This page is where a Readimus guest (anonymous) session finishes
   // becoming a real account (app's docs/PLAN_GUEST_MODE.md, section 7.3).
   // The app calls supabase.auth.updateUser({ email, data }) on the guest's
   // still-active anonymous session; GoTrue emails a confirmation link for
@@ -133,8 +133,8 @@
 </script>
 
 <svelte:head>
-  <title>BookDiary - Complete Your Account</title>
-  <meta name="description" content="Finish creating your BookDiary account" />
+  <title>Readimus - Complete Your Account</title>
+  <meta name="description" content="Finish creating your Readimus account" />
 </svelte:head>
 
 <div class="container">
@@ -193,7 +193,7 @@
       <div class="message message-success">
         <p>✅ Your account is ready!</p>
         <p>
-          You can now close this window and log in to the BookDiary app with
+          You can now close this window and log in to the Readimus app with
           your email and password.
         </p>
       </div>

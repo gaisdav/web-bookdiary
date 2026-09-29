@@ -1,7 +1,7 @@
 <footer class="footer">
   <div class="shell footer-grid">
     <div class="footer-brand">
-      <a href="/" class="brand"><img src="/brand/readimus-logo-draft.jpg" alt="" width="38" height="38" /><span>Readimus</span></a>
+      <a href="/" class="brand"><img src="/brand/readimus-mark-transparent.png" alt="" width="38" height="38" /><span>Readimus</span></a>
       <p>Your books, notes, and reading life in one thoughtful place.</p>
       <a class="email" href="mailto:support@readimus.com">support@readimus.com</a>
     </div>
@@ -16,7 +16,7 @@
   .footer-grid { display: grid; grid-template-columns: minmax(260px, 2fr) 1fr 1fr; gap: 64px; }
   .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--color-text); font-family: var(--font-family-display); font-size: 20px; font-weight: 800; letter-spacing: -0.04em; text-decoration: none; }
   .brand:hover { color: var(--color-text); text-decoration: none; }
-  .brand img { width: 38px; height: 38px; border-radius: 11px; object-fit: cover; }
+  .brand img { width: 38px; height: 38px; border-radius: 11px; background: var(--color-accent-soft); object-fit: cover; }
   .footer-brand p { max-width: 370px; margin: 16px 0 10px; color: var(--color-text-secondary); }
   .email { font-size: 14px; }
   h2 { margin-bottom: 12px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); }

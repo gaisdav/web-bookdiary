@@ -1,4 +1,6 @@
 <script lang="ts">
+  export let showName = true;
+
   let open = false;
   const close = () => (open = false);
 </script>
@@ -6,8 +8,8 @@
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="Readimus home" on:click={close}>
-      <img src="/brand/readimus-logo-draft.jpg" alt="" width="42" height="42" />
-      <span>Readimus</span>
+      <img src="/brand/readimus-mark-transparent.png" alt="" width="42" height="42" />
+      {#if showName}<span>Readimus</span>{/if}
     </a>
 
     <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded={open} on:click={() => (open = !open)}>
@@ -16,6 +18,7 @@
 
     <nav class:open aria-label="Main navigation">
       <a href="/#features" on:click={close}>Features</a>
+      <a href="/support" on:click={close}>Support</a>
       <span class="status">Coming soon</span>
     </nav>
   </div>
@@ -27,7 +30,7 @@
   .header-inner { justify-content: space-between; }
   .brand { gap: 10px; color: var(--color-text); font-family: var(--font-family-display); font-size: 21px; font-weight: 800; letter-spacing: -0.04em; text-decoration: none; }
   .brand:hover { color: var(--color-text); text-decoration: none; }
-  .brand img { width: 42px; height: 42px; border-radius: 12px; object-fit: cover; }
+  .brand img { width: 42px; height: 42px; border-radius: 12px; background: var(--color-accent-soft); object-fit: cover; }
   nav { gap: 28px; font-size: 14px; font-weight: 700; }
   nav a { color: var(--color-text-secondary); text-decoration: none; }
   nav a:hover { color: var(--color-text); }

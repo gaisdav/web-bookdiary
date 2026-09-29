@@ -103,12 +103,14 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   background: var(--color-background);
+  overflow-x: clip;
 }
 
 a {
@@ -124,7 +126,7 @@ button { cursor: pointer; }
 img { display: block; max-width: 100%; }
 :focus-visible { outline: 3px solid rgb(10 132 255 / 40%); outline-offset: 3px; }
 
-.shell { width: min(100% - 40px, var(--content-width)); margin-inline: auto; }
+.shell { width: min(calc(100% - 40px), var(--content-width)); margin-inline: auto; }
 .eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-primary-dark); }
 
 .button {
@@ -146,7 +148,7 @@ img { display: block; max-width: 100%; }
 .button-secondary { color: var(--color-text); border-color: var(--color-border); background: rgb(255 255 255 / 75%); }
 .button-secondary:hover { color: var(--color-text); box-shadow: var(--shadow-small); }
 
-@media (max-width: 680px) { .shell { width: min(100% - 28px, var(--content-width)); } }
+@media (max-width: 680px) { .shell { width: min(calc(100% - 28px), var(--content-width)); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

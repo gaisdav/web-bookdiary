@@ -11,44 +11,48 @@
   />
 </svelte:head>
 
-<SiteHeader />
+<SiteHeader showName={false} />
 
 <main>
   <section class="hero shell">
     <div class="hero-copy">
       <h1>Readimus</h1>
       <p class="hero-subtitle">Your reading life, all in one place.</p>
+      <p class="hero-description">
+        Track your books, follow your friends, and discover what to read next.
+      </p>
       <div class="store-actions" aria-label="App availability">
         <span class="store-button">
           <small>Coming soon on the</small>
           App Store
         </span>
-        <span class="store-button store-button-light">
+        <span class="store-button">
           <small>Coming soon on</small>
           Google Play
         </span>
       </div>
     </div>
 
-    <div class="hero-mark" aria-label="Readimus working logo">
-      <div class="mark-halo"></div>
-      <img src="/brand/readimus-logo-draft.jpg" alt="" />
+    <div class="hero-product" aria-label="Readimus social feed preview">
+      <div class="hero-phone">
+        <img
+          src="/product/feed-light.jpg"
+          alt="A Readimus feed showing friends' reviews and reading activity"
+          width="768"
+          height="1665"
+        />
+      </div>
     </div>
   </section>
 
   <section class="features" id="features">
     <div class="shell">
       <div class="section-heading">
-        <p class="eyebrow">Made for your reading life</p>
         <h2>Keep more than a list of titles.</h2>
-        <p>
-          Track your books, save what mattered, and discover what to read
-          through people whose taste you trust.
-        </p>
       </div>
 
       <div class="features-grid">
-        <article class="feature-card feature-primary">
+        <article class="feature-card feature-neutral">
           <span class="feature-label">Your library</span>
           <h3>Track your books.</h3>
           <p>
@@ -66,7 +70,7 @@
           </p>
         </article>
 
-        <article class="feature-card feature-neutral">
+        <article class="feature-card feature-primary">
           <span class="feature-label">Your community</span>
           <h3>Discover through other readers.</h3>
           <p>
@@ -78,13 +82,50 @@
     </div>
   </section>
 
+  <section class="reading-story">
+    <div class="shell story-grid">
+      <div class="story-copy">
+        <h2><span>Remember every</span><span>book you read.</span></h2>
+        <p>
+          Every start, finish, favorite, and note becomes part of a history you
+          will actually want to revisit.
+        </p>
+        <div class="story-states" aria-label="Reading journey">
+          <span><i class="state-dot started"></i>Started</span>
+          <span><i class="state-dot finished"></i>Read</span>
+          <span><i class="state-heart">♥</i>Loved</span>
+        </div>
+      </div>
+
+      <div class="story-visual">
+        <div class="story-phone">
+          <img
+            src="/product/diary-light.jpg"
+            alt="Readimus reading diary showing books started and finished by date"
+            width="768"
+            height="1665"
+            loading="lazy"
+          />
+        </div>
+        <div class="profile-preview">
+          <img
+            src="/product/profile-dark.jpg"
+            alt="Readimus reader profile in dark mode"
+            width="768"
+            height="1665"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="final-cta shell">
-    <p class="eyebrow">Readimus is coming soon</p>
     <h2>Your books deserve more than a list.</h2>
     <p>Readimus is coming soon to iOS and Android.</p>
     <div class="store-actions centered">
-      <span class="store-button"><small>Coming soon on the</small>App Store</span>
-      <span class="store-button store-button-light"><small>Coming soon on</small>Google Play</span>
+      <span class="store-button"><small>For iPhone and iPad</small>App Store</span>
+      <span class="store-button"><small>For Android</small>Google Play</span>
     </div>
   </section>
 </main>
@@ -93,28 +134,29 @@
 
 <style>
   .hero {
-    min-height: min(820px, calc(100vh - 78px));
+    min-height: min(640px, calc(100vh - 78px));
     display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
     align-items: center;
     gap: clamp(42px, 7vw, 100px);
-    padding-top: 52px;
-    padding-bottom: 92px;
+    padding-top: 16px;
+    padding-bottom: 48px;
     overflow: hidden;
   }
 
   .hero-copy {
     position: relative;
     z-index: 2;
+    min-width: 0;
   }
 
   h1 {
     margin: 0;
     color: var(--primary-dark);
     font-family: var(--font-display);
-    font-size: clamp(5.5rem, 13.5vw, 11.5rem);
+    font-size: clamp(4.75rem, 9.8vw, 9rem);
     font-weight: 800;
-    line-height: 0.78;
+    line-height: 0.82;
     letter-spacing: -0.085em;
   }
 
@@ -125,6 +167,16 @@
     font-family: var(--font-editorial);
     font-size: clamp(1.75rem, 3.6vw, 3.6rem);
     line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    max-width: 560px;
+    margin: 22px 0 0;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.35vw, 1.14rem);
+    line-height: 1.65;
+    text-wrap: balance;
   }
 
   .store-actions {
@@ -142,7 +194,7 @@
     border-radius: 14px;
     background: var(--primary-dark);
     color: white;
-    font-size: 0.88rem;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1.25;
     box-shadow: var(--shadow-sm);
@@ -154,35 +206,34 @@
     opacity: 0.76;
   }
 
-  .store-button-light {
-    border-color: var(--border);
-    background: white;
-    color: var(--text);
-  }
-
-  .hero-mark {
+  .hero-product {
     position: relative;
     display: grid;
     place-items: center;
-    min-height: 520px;
+    min-height: 640px;
+    min-width: 0;
   }
 
-  .hero-mark img {
-    position: relative;
-    z-index: 2;
-    width: min(430px, 92%);
-    aspect-ratio: 1;
-    border-radius: 29%;
-    object-fit: cover;
-    box-shadow: 0 34px 90px rgb(20 70 78 / 16%);
+  .hero-phone,
+  .story-phone,
+  .profile-preview {
+    overflow: hidden;
+    border: 7px solid #162326;
+    border-radius: 42px;
+    background: #162326;
+    box-shadow: 0 34px 90px rgb(20 70 78 / 18%);
   }
 
-  .mark-halo {
-    position: absolute;
-    width: 116%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: linear-gradient(145deg, var(--primary-soft), var(--accent-soft));
+  .hero-phone {
+    width: min(336px, 82%);
+    transform: rotate(2.2deg);
+  }
+
+  .hero-phone img,
+  .story-phone img,
+  .profile-preview img {
+    width: 100%;
+    height: auto;
   }
 
   .features {
@@ -193,23 +244,17 @@
   .section-heading {
     max-width: 850px;
     margin-bottom: 58px;
+    min-width: 0;
   }
 
   .section-heading h2,
   .final-cta h2 {
-    margin: 14px 0 0;
+    margin: 0;
     font-family: var(--font-display);
     font-size: clamp(2.6rem, 5.8vw, 5.5rem);
     line-height: 0.96;
     letter-spacing: -0.06em;
-  }
-
-  .section-heading > p:last-child {
-    max-width: 710px;
-    margin: 24px 0 0;
-    color: var(--text-muted);
-    font-size: 1.12rem;
-    line-height: 1.7;
+    text-wrap: balance;
   }
 
   .features-grid {
@@ -226,6 +271,7 @@
     padding: clamp(28px, 4vw, 46px);
     border: 1px solid var(--border);
     border-radius: 30px;
+    min-width: 0;
   }
 
   .feature-primary {
@@ -236,6 +282,10 @@
   .feature-blue {
     border-color: #c8e1ff;
     background: var(--accent-soft);
+  }
+
+  .feature-blue .feature-label {
+    color: var(--color-accent-dark);
   }
 
   .feature-neutral {
@@ -257,12 +307,108 @@
     font-size: clamp(1.85rem, 3vw, 3rem);
     line-height: 1;
     letter-spacing: -0.045em;
+    text-wrap: balance;
   }
 
   .feature-card p {
     margin: 0;
     color: var(--text-muted);
     line-height: 1.68;
+  }
+
+  .reading-story {
+    overflow: hidden;
+    padding: 126px 0;
+    background: #073b43;
+    color: white;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(440px, 1.18fr);
+    align-items: center;
+    gap: clamp(60px, 10vw, 140px);
+  }
+
+  .story-copy {
+    position: relative;
+    z-index: 2;
+    transform: translateY(-36px);
+  }
+
+  .story-copy h2 {
+    max-width: 520px;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.1vw, 4.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
+
+  .story-copy h2 span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .story-copy > p {
+    max-width: 510px;
+    margin: 26px 0 0;
+    color: rgb(255 255 255 / 83%);
+    font-size: 1.08rem;
+    line-height: 1.7;
+  }
+
+  .story-states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 38px;
+    color: rgb(255 255 255 / 86%);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .story-states span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .state-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+
+  .state-dot.started { background: #168cff; }
+  .state-dot.finished { background: #24ba64; }
+  .state-heart { color: #ff5048; font-size: 1rem; font-style: normal; }
+
+  .story-visual {
+    position: relative;
+    min-height: 680px;
+  }
+
+  .story-phone {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    width: min(350px, 68%);
+    border-color: #172326;
+    box-shadow: 0 34px 90px rgb(0 0 0 / 36%);
+    transform: rotate(2deg);
+  }
+
+  .profile-preview {
+    position: absolute;
+    bottom: -84px;
+    left: 0;
+    width: min(284px, 55%);
+    border-color: rgb(255 255 255 / 84%);
+    box-shadow: 0 30px 80px rgb(0 0 0 / 28%);
+    transform: rotate(-5deg);
   }
 
   .final-cta {
@@ -291,7 +437,7 @@
     .hero {
       min-height: auto;
       grid-template-columns: 1fr;
-      padding-top: 76px;
+      padding-top: 64px;
       text-align: center;
     }
 
@@ -300,20 +446,21 @@
       margin-left: auto;
     }
 
+    .hero-description {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
     .store-actions {
       justify-content: center;
     }
 
-    .hero-mark {
-      min-height: 410px;
+    .hero-product {
+      min-height: 620px;
     }
 
-    .hero-mark img {
-      width: min(370px, 76%);
-    }
-
-    .mark-halo {
-      width: min(520px, 100%);
+    .hero-phone {
+      width: min(320px, 70%);
     }
 
     .features-grid {
@@ -323,22 +470,52 @@
     .feature-card {
       min-height: 300px;
     }
+
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 68px;
+    }
+
+    .story-copy {
+      text-align: center;
+      transform: none;
+    }
+
+    .story-copy h2,
+    .story-copy > p {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .story-states {
+      justify-content: center;
+    }
+
+    .story-visual {
+      width: min(100%, 590px);
+      margin: 0 auto;
+    }
   }
 
   @media (max-width: 640px) {
     .hero {
       gap: 28px;
-      padding-top: 52px;
-      padding-bottom: 68px;
+      padding-top: 40px;
+      padding-bottom: 58px;
     }
 
     h1 {
-      font-size: clamp(4.7rem, 25vw, 7rem);
+      font-size: clamp(3.5rem, 18vw, 5.2rem);
+      letter-spacing: -0.075em;
     }
 
     .hero-subtitle {
-      margin-top: 30px;
-      font-size: clamp(1.6rem, 8vw, 2.4rem);
+      margin-top: 24px;
+      font-size: clamp(1.45rem, 7vw, 2.2rem);
+    }
+
+    .hero-description {
+      margin-top: 18px;
     }
 
     .store-button {
@@ -346,26 +523,82 @@
       text-align: left;
     }
 
-    .hero-mark {
-      min-height: 340px;
+    .hero-product {
+      min-height: 500px;
     }
 
-    .hero-mark img {
-      width: min(300px, 82%);
+    .hero-phone {
+      width: min(240px, 72%);
+      border-width: 5px;
+      border-radius: 34px;
     }
 
     .features {
-      padding: 86px 0;
+      padding: 72px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2,
+    .final-cta h2 {
+      font-size: clamp(2.25rem, 11vw, 3.3rem);
+      line-height: 0.98;
+    }
+
+    .features-grid {
+      gap: 14px;
     }
 
     .feature-card {
-      min-height: 280px;
+      min-height: 0;
+      padding: 28px 24px;
       border-radius: 24px;
     }
 
+    .feature-card h3 {
+      margin-top: 36px;
+    }
+
+    .reading-story {
+      padding: 82px 0 92px;
+    }
+
+    .story-copy h2 {
+      font-size: clamp(2.45rem, 12vw, 3.5rem);
+    }
+
+    .story-copy > p {
+      margin-top: 22px;
+      font-size: 1rem;
+    }
+
+    .story-states {
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .story-visual {
+      min-height: 500px;
+    }
+
+    .story-phone {
+      width: min(240px, 68%);
+      border-width: 5px;
+      border-radius: 34px;
+    }
+
+    .profile-preview {
+      bottom: -22px;
+      width: min(175px, 50%);
+      border-width: 5px;
+      border-radius: 30px;
+    }
+
     .final-cta {
-      padding-top: 100px;
-      padding-bottom: 90px;
+      padding-top: 84px;
+      padding-bottom: 78px;
     }
   }
 </style>

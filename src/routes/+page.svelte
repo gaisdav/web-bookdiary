@@ -141,7 +141,6 @@
     gap: clamp(42px, 7vw, 100px);
     padding-top: 16px;
     padding-bottom: 48px;
-    overflow: hidden;
   }
 
   .hero-copy {

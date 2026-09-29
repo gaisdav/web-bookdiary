@@ -12,7 +12,7 @@
   <section class="card card-accent">
     <h2>Send a copyright report</h2>
     <p>Email your notice to our dedicated address. To help us review it, include all of the information below.</p>
-    <a class="mail-button" href="mailto:copyright@readimus.com?subject=Copyright%20report">copyright@readimus.com</a>
+    <a class="mail-button" href="mailto:support@readimus.com?subject=Copyright%20report">support@readimus.com</a>
   </section>
   <section class="card">
     <h2>What to include</h2>

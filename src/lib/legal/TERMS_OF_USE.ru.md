@@ -321,4 +321,4 @@ Privacy Policy. О существенном изменении оператор�
 
 Жалобы на возможное нарушение авторских прав рассматриваются в соответствии с
 [Copyright / Takedown Policy](/copyright). Связаться с нами можно по адресу
-`copyright@readimus.com`.
+`support@readimus.com`.

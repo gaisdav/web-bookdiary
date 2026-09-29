@@ -307,4 +307,4 @@ For questions about personal data, email `privacy@readimus.com`.
 
 Reports of potential copyright infringement are handled in accordance with the
 [Copyright / Takedown Policy](/copyright). You can contact us at
-`copyright@readimus.com`.
+`support@readimus.com`.

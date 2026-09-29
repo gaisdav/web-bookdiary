@@ -4,3 +4,7 @@
 
 <slot />
 
+<style>
+	:global(.language-switch) { display: none; }
+</style>
+

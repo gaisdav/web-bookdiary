@@ -36,10 +36,13 @@
     <div class="hero-product" aria-label="Readimus social feed preview">
       <div class="hero-phone">
         <img
-          src="/product/feed-light.jpg"
+          src="/product/feed-light.webp"
+          srcset="/product/feed-light-448.webp 448w, /product/feed-light.webp 768w"
+          sizes="(max-width: 640px) 240px, (max-width: 900px) 320px, 336px"
           alt="A Readimus feed showing friends' reviews and reading activity"
           width="768"
           height="1665"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -100,7 +103,9 @@
       <div class="story-visual">
         <div class="story-phone">
           <img
-            src="/product/diary-light.jpg"
+            src="/product/diary-light.webp"
+            srcset="/product/diary-light-448.webp 448w, /product/diary-light.webp 768w"
+            sizes="(max-width: 640px) 240px, 350px"
             alt="Readimus reading diary showing books started and finished by date"
             width="768"
             height="1665"
@@ -109,7 +114,9 @@
         </div>
         <div class="profile-preview">
           <img
-            src="/product/profile-dark.jpg"
+            src="/product/profile-dark.webp"
+            srcset="/product/profile-dark-448.webp 448w, /product/profile-dark.webp 768w"
+            sizes="(max-width: 640px) 175px, 284px"
             alt="Readimus reader profile in dark mode"
             width="768"
             height="1665"
@@ -202,7 +209,7 @@
   .store-button small {
     font-size: 0.64rem;
     font-weight: 500;
-    opacity: 0.76;
+    opacity: 0.84;
   }
 
   .hero-product {

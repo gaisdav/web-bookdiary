@@ -8,7 +8,7 @@
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="Readimus home" on:click={close}>
-      <img src="/brand/readimus-mark-transparent.png" alt="" width="42" height="42" />
+      <img src="/brand/readimus-mark-128.webp" alt="" width="42" height="42" />
       {#if showName}<span>Readimus</span>{/if}
     </a>
 

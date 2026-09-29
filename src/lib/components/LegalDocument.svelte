@@ -42,7 +42,7 @@
   .legal-content :global(p) { margin: 0 0 18px; }
   .legal-content :global(ul), .legal-content :global(ol) { margin: 0 0 22px; padding-left: 24px; }
   .legal-content :global(li) { margin-bottom: 8px; padding-left: 5px; }
-  .legal-content :global(a) { color: var(--accent); }
+  .legal-content :global(a) { color: var(--accent-dark); }
   .legal-content :global(code) { padding: 2px 6px; border-radius: 6px; background: var(--surface-muted); color: var(--primary-dark); font-family: ui-monospace, monospace; font-size: 0.88em; }
   @media (max-width: 600px) {
     .legal-shell { padding-top: 32px; padding-bottom: 72px; }

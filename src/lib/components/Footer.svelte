@@ -1,7 +1,7 @@
 <footer class="footer">
   <div class="shell footer-grid">
     <div class="footer-brand">
-      <a href="/" class="brand"><img src="/brand/readimus-mark-transparent.png" alt="" width="38" height="38" /><span>Readimus</span></a>
+      <a href="/" class="brand"><img src="/brand/readimus-mark-128.webp" alt="" width="38" height="38" /><span>Readimus</span></a>
       <p>Your books, notes, and reading life in one thoughtful place.</p>
       <a class="email" href="mailto:support@readimus.com">support@readimus.com</a>
     </div>

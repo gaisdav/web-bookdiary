@@ -20,6 +20,7 @@ export const renderMarkdown = (markdown: string) => {
   const lines = markdown.replaceAll("\r\n", "\n").split("\n");
   const html: string[] = [];
   let paragraph: string[] = [];
+  let item: string[] = [];
   let listType: "ul" | "ol" | null = null;
 
   const closeParagraph = () => {
@@ -29,7 +30,17 @@ export const renderMarkdown = (markdown: string) => {
     }
   };
 
+  // List items wrap onto indented continuation lines; they belong to the open
+  // <li>, not to a <p> of their own inside the list.
+  const closeItem = () => {
+    if (item.length > 0) {
+      html.push(`<li>${renderInline(item.join(" "))}</li>`);
+      item = [];
+    }
+  };
+
   const closeList = () => {
+    closeItem();
     if (listType) {
       html.push(`</${listType}>`);
       listType = null;
@@ -48,16 +59,19 @@ export const renderMarkdown = (markdown: string) => {
       html.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
     } else if (unordered || ordered) {
       closeParagraph();
+      closeItem();
       const nextType = unordered ? "ul" : "ol";
       if (listType !== nextType) {
         closeList();
         listType = nextType;
         html.push(`<${listType}>`);
       }
-      html.push(`<li>${renderInline((unordered ?? ordered)?.[1] ?? "")}</li>`);
+      item.push((unordered ?? ordered)?.[1] ?? "");
     } else if (line.trim() === "") {
       closeParagraph();
       closeList();
+    } else if (item.length > 0) {
+      item.push(line.trim());
     } else {
       paragraph.push(line.trim());
     }

@@ -40,7 +40,7 @@
   .content :global(p) { margin: 0; }
   .content :global(ol), .content :global(ul) { margin: 14px 0 0; padding-left: 22px; }
   .content :global(li) { margin-bottom: 8px; padding-left: 4px; }
-  .content :global(a) { color: var(--accent); font-weight: 700; }
+  .content :global(a) { color: var(--accent-dark); font-weight: 700; }
   .content :global(.mail-button) { display: inline-flex; margin-top: 22px; padding: 13px 18px; border-radius: 999px; background: var(--text); color: white; text-decoration: none; }
   @media (max-width: 650px) {
     .info { padding-top: 56px; padding-bottom: 80px; }

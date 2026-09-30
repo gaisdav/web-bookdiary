@@ -59,7 +59,9 @@ a standard account.
 - book notes and images attached to them;
 - reading activity posts and reactions to them;
 - follows, followers, and follow requests;
-- reports, selected report reasons, and information submitted with reports; and
+- users you have blocked;
+- reports, selected report reasons, information submitted with reports, and a
+  copy of the reported content saved at the time of the report; and
 - information about moderation measures and requests to review decisions.
 
 ### 2.5. Communications With Us
@@ -118,8 +120,8 @@ We use personal data to:
 - maintain your library, reading diary, lists, notes, and other selected
   features;
 - display your profile and content in accordance with your privacy settings;
-- provide follows, comments, reactions, in-app notifications, and other
-  community features;
+- provide follows, user blocking, comments, reactions, in-app notifications,
+  and other community features;
 - search for books and maintain the quality of the book catalog;
 - receive and review reports, moderate content, and review decisions;
 - respond to user communications;

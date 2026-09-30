@@ -16,6 +16,10 @@ When creating an account, you must accept our [Terms of Use](/terms) and these
 Guidelines. By publishing content or interacting with other users, you agree
 to follow them.
 
+There is no tolerance for objectionable content or abusive users on Readimus.
+Content that violates these Guidelines may be removed, and the accounts
+responsible for it may be restricted or terminated, as described in section 9.
+
 ## 1. Treat others with respect
 
 The following are not allowed:
@@ -112,17 +116,24 @@ reasonably expect to see them.
 
 ## 8. Report violations
 
-If you find a violation of these Guidelines, use the “Report” option next to
-the relevant content or profile. You can also send us a link and a brief
-description of the issue at `support@readimus.com`.
+If you find a violation of these Guidelines, use the “Report” option on the
+user's profile, review, or comment. To report other content, such as a list or
+reading activity, report the profile of the user who published it and describe
+the issue. You can also send us a link and a brief description of the issue at
+`support@readimus.com`.
 
-We review reports within a reasonable timeframe based on the nature and
-severity of the violation. Reports involving an immediate safety risk, child
-exploitation, or other potentially dangerous content are prioritized. Complex
-cases may take longer to review.
+We aim to review reports of objectionable content within 24 hours and remove
+content that violates these Guidelines. Reports involving an immediate safety
+risk, child exploitation, or other potentially dangerous content are
+prioritized. Complex cases may take longer to review.
 
 You can block a user if you do not want to see their content or interact with
-them.
+them. Once blocked, that user can no longer follow you, see your profile,
+library, or activity, or comment on or like your content, and you will no
+longer see theirs. Blocking also removes any existing follows between you. The
+blocked user is not notified, and you can unblock them at any time in
+Settings. We may take blocks into account when reviewing accounts for
+violations.
 
 Do not include unnecessary personal information in your report. If there is
 an immediate threat to someone's life or safety, contact your local emergency

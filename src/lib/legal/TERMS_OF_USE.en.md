@@ -80,6 +80,10 @@ Before you can publish User Content, you must accept these Terms and the
 Community Guidelines. A violation of the Community Guidelines is also a
 violation of these Terms.
 
+There is no tolerance for objectionable content or abusive users on Readimus.
+Content that violates the Community Guidelines may be removed, and the accounts
+responsible for it may be restricted or terminated.
+
 ## 6. Your Content
 
 “User Content” means materials you add to Readimus, including profile
@@ -159,13 +163,15 @@ You may not:
 
 ## 10. Reports, Blocking, and Moderation
 
-You may report content or a profile using the in-app Report feature or by
-emailing `support@readimus.com`. You may also block a user if you do not want to see
-their content or interact with them.
+You may report a profile, review, or comment using the in-app Report feature,
+or report any content by emailing `support@readimus.com`. You may also block a
+user if you do not want to see their content or interact with them; the
+effects of blocking are described in the Community Guidelines.
 
-We may review reports and take measures described in the Community Guidelines,
-including limiting the visibility of or removing content, restricting features,
-temporarily suspending an account, or permanently closing an account.
+We aim to review reports of objectionable content within 24 hours and may take
+measures described in the Community Guidelines, including limiting the
+visibility of or removing content, restricting features, temporarily
+suspending an account, or permanently closing an account.
 
 We consider the nature, context, severity, and frequency of a violation. Serious
 violations may result in immediate action without prior warning. Creating

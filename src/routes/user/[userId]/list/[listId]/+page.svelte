@@ -9,6 +9,8 @@
 	<title>Open in Readimus</title>
 	<meta name="robots" content="noindex" />
 	<meta name="description" content="Continue in the Readimus app to view this list." />
+	<meta property="og:title" content="Open in Readimus" />
+	<meta property="og:description" content="Continue in the Readimus app to view this list." />
 
 	{#if PUBLIC_IOS_APP_ID}
 		<meta name="apple-itunes-app" content="app-id={PUBLIC_IOS_APP_ID}" />

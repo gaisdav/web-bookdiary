@@ -13,6 +13,8 @@
 <svelte:head>
   <title>{pageTitle} — Readimus</title>
   <meta name="description" content={description} />
+  <meta property="og:title" content="{pageTitle} — Readimus" />
+  <meta property="og:description" content={description} />
 </svelte:head>
 
 <SiteHeader />

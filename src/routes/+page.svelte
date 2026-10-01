@@ -7,7 +7,12 @@
   <title>Readimus — Your reading life, all in one place</title>
   <meta
     name="description"
-    content="Track your books, save notes and reviews, create personal lists, and discover what to read through people whose taste you trust."
+    content="Readimus is a book tracker and reading diary. Log what you read, save notes and reviews, build personal lists, and discover books through people whose taste you trust."
+  />
+  <meta property="og:title" content="Readimus — Book Tracker & Reading Diary App" />
+  <meta
+    property="og:description"
+    content="Log what you read, save notes and reviews, build personal lists, and discover books through people whose taste you trust."
   />
 </svelte:head>
 

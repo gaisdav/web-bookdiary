@@ -7,6 +7,8 @@
 <svelte:head>
   <title>Contacts - Readimus Support</title>
   <meta name="description" content="Contact Readimus support" />
+  <meta property="og:title" content="Contacts - Readimus Support" />
+  <meta property="og:description" content="Contact Readimus support" />
 </svelte:head>
 
 <div class="container">

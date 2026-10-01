@@ -83,8 +83,20 @@ automatically process:
 - your selected language and limited network information needed for the
   application to function.
 
+When the application crashes or hits an error, it sends a crash report to our
+error-monitoring provider, Sentry (see Section 9). A report contains technical
+information: the error message and stack trace, the application version, the
+device model and operating system version, the names of the screens you visited
+shortly before the error, the method and address (without query parameters) of a
+failed network request, an account identifier, and whether the account is a
+guest account. We configure reports not to include your name, email address, IP
+address, screenshots, or screen recordings, and we do not intentionally include
+the text of your notes, reviews, or comments. Because a report carries your
+account identifier, it is linked to your account. Crash reports are sent only
+from the released application, not from development builds.
+
 As of the date of the latest update, Readimus does not use separate SDKs for
-advertising tracking, product analytics, crash reporting, or push notifications.
+advertising tracking, product analytics, or push notifications.
 
 ## 3. Device Permissions and Local Data
 
@@ -194,6 +206,8 @@ Policy with the following categories of recipients:
   functions;
 - **Google Books and ISBNDB** — book search and retrieval of book metadata and
   covers;
+- **Sentry** (Functional Software, Inc.) — collection and analysis of crash and
+  error reports, described in Section 2.6;
 - **Vercel** — temporary hosting for the website and account-related pages;
   this Policy will be updated if the hosting provider changes;
 - **email delivery and communications providers** — delivery of service
@@ -217,7 +231,8 @@ profile data or User Content for application distribution.
 Readimus is available to users worldwide and is operated from Serbia. Our
 service providers and their subprocessors may process data in other countries.
 The primary region of the Supabase project is Central Europe (Frankfurt,
-Germany).
+Germany). Crash reports are stored in Sentry’s European Union region; Sentry’s
+operator is a company based in the United States.
 
 Where applicable law requires safeguards for international data transfers, we
 use legally recognized mechanisms, such as an adequacy decision, standard
@@ -240,7 +255,8 @@ security and legal requirements into account.
   the report is closed;
 - technical logs are retained only for as long as reasonably necessary to
   maintain security, investigate incidents, and diagnose technical problems;
-  and
+- crash reports are retained by Sentry for 30 days and then deleted
+  automatically; and
 - data remaining in backups is deleted through the normal backup rotation
   process within 7 days.
 

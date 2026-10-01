@@ -7,6 +7,7 @@
 
 <svelte:head>
 	<title>Open in Readimus</title>
+	<meta name="robots" content="noindex" />
 	<meta name="description" content="Continue in the Readimus app to view this profile." />
 
 	{#if PUBLIC_IOS_APP_ID}

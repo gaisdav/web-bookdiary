@@ -96,7 +96,26 @@ account identifier, it is linked to your account. Crash reports are sent only
 from the released application, not from development builds.
 
 As of the date of the latest update, Readimus does not use separate SDKs for
-advertising tracking, product analytics, or push notifications.
+advertising tracking or push notifications. Usage statistics are described in
+Section 2.7.
+
+### 2.7. Usage Analytics
+
+To understand how Readimus is used and to improve it, the application sends
+anonymous usage statistics to our analytics provider, PostHog (see Section 9).
+The statistics contain: a random identifier generated on your device when you
+install the application (it is not linked to your account, and it changes when
+you reinstall the application or delete your account); events that describe what
+you do in the application, such as which screens you open, that you added a book
+or changed a reading status, or that you opened the application; whether you are
+using guest mode; the application language; and the application version and
+platform. They do not include your name, email address, username, account
+identifier, the text of your notes, reviews, comments or search queries, the
+titles of books, or your IP address. We do not link this data to your account and
+do not use it for advertising. Statistics are sent only from the released
+application, not from development builds. If several people use one device, or
+you sign out and sign in to another account, the statistics from that device are
+not separated.
 
 ## 3. Device Permissions and Local Data
 
@@ -106,10 +125,11 @@ your action and only to the extent necessary for the feature you selected. You
 can revoke permission in your device settings.
 
 Readimus stores session data, cached books and search results, a profile
-snapshot, and interface settings on your device. This helps keep you signed in
-and makes the application work faster. Local data may remain until you sign out,
-clear the application’s data, or uninstall the application, unless a shorter
-retention period applies to a particular record.
+snapshot, interface settings, and a random identifier used for usage statistics
+(Section 2.7) together with statistics waiting to be sent on your device. This
+helps keep you signed in and makes the application work faster. Local data may
+remain until you sign out, clear the application’s data, or uninstall the
+application, unless a shorter retention period applies to a particular record.
 
 ## 4. Where We Obtain Data
 
@@ -139,6 +159,8 @@ We use personal data to:
 - respond to user communications;
 - protect users and the Service and prevent spam, fraud, unauthorized access,
   and circumvention of restrictions;
+- understand, in aggregate and without identifying you, how the Service is used,
+  and improve it;
 - diagnose technical problems and maintain the reliability of the Service; and
 - comply with legal obligations and protect legal rights.
 
@@ -155,9 +177,9 @@ more of the following:
 - **performance of a contract** — to create your account and provide features
   you request under the [Terms of Use](/terms);
 - **legitimate interests** — to maintain security, prevent abuse, moderate the
-  community, improve the reliability of the Service, and protect our legal
-  rights, provided those interests are not overridden by your rights and
-  freedoms;
+  community, improve the reliability of the Service, understand how it is used so
+  that we can improve it, and protect our legal rights, provided those interests
+  are not overridden by your rights and freedoms;
 - **legal obligation** — where data must be processed or retained to comply with
   the law or a lawful request from a competent authority; and
 - **consent** — where consent is required for a particular optional activity.
@@ -208,6 +230,8 @@ Policy with the following categories of recipients:
   covers;
 - **Sentry** (Functional Software, Inc.) — collection and analysis of crash and
   error reports, described in Section 2.6;
+- **PostHog** (PostHog, Inc.) — collection and analysis of anonymous usage
+  statistics, described in Section 2.7;
 - **Vercel** — temporary hosting for the website and account-related pages;
   this Policy will be updated if the hosting provider changes;
 - **email delivery and communications providers** — delivery of service
@@ -232,7 +256,9 @@ Readimus is available to users worldwide and is operated from Serbia. Our
 service providers and their subprocessors may process data in other countries.
 The primary region of the Supabase project is Central Europe (Frankfurt,
 Germany). Crash reports are stored in Sentry’s European Union region; Sentry’s
-operator is a company based in the United States.
+operator is a company based in the United States. Anonymous usage statistics are
+stored in PostHog’s European Union region; PostHog’s operator is also a company
+based in the United States.
 
 Where applicable law requires safeguards for international data transfers, we
 use legally recognized mechanisms, such as an adequacy decision, standard
@@ -256,7 +282,9 @@ security and legal requirements into account.
 - technical logs are retained only for as long as reasonably necessary to
   maintain security, investigate incidents, and diagnose technical problems;
 - crash reports are retained by Sentry for 30 days and then deleted
-  automatically; and
+  automatically;
+- anonymous usage statistics are retained by PostHog for up to 1 year and then
+  deleted automatically; and
 - data remaining in backups is deleted through the normal backup rotation
   process within 7 days.
 
@@ -275,6 +303,12 @@ that must be temporarily retained for the reasons described in Section 11.
 Book information and covers added to the shared catalog may continue to exist as
 part of the shared book database if they are no longer associated with you and
 do not identify you.
+
+Anonymous usage statistics (Section 2.7) are not linked to your account and are
+therefore not deleted together with it. When you delete your account, the
+application resets the random identifier on your device, so earlier statistics
+are not carried over to what you do next. Statistics already collected are
+deleted automatically when the period in Section 11 ends.
 
 Files in backups may remain for a limited time until their scheduled deletion.
 If an individual file is not removed automatically because of a technical
@@ -300,6 +334,11 @@ Depending on applicable law, you may have the right to:
 To exercise your rights, email `privacy@readimus.com`. We may request
 information necessary to verify your identity and protect your account. We will
 respond within the period required by applicable law.
+
+Because usage statistics are not linked to your account, we cannot find or delete
+the statistics of a particular person on request. The application currently has
+no setting to turn usage statistics off. If you object to this processing, email
+`privacy@readimus.com` and we will review your objection.
 
 You may contact the Serbian Commissioner for Information of Public Importance
 and Personal Data Protection or, where applicable, the data protection authority

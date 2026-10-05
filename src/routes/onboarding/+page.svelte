@@ -85,7 +85,7 @@
 <header class="onboarding-header">
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="Readimus">
-      <img src="/brand/readimus-mark-transparent.png" alt="" width="42" height="42" />
+      <img src="/brand/readimus-mark-128.webp" alt="" width="42" height="42" />
       <span>Readimus</span>
     </a>
   </div>
@@ -163,7 +163,15 @@
       </div>
       <div class="visual-wrap visual-dark">
         <div class="phone-shell image-phone">
-          <img src="/product/diary-light.jpg" alt="Readimus calendar showing books by reading date" width="768" height="1665" loading="lazy" />
+          <img
+            src="/product/diary-light.webp"
+            srcset="/product/diary-light-448.webp 448w, /product/diary-light.webp 768w"
+            sizes="(max-width: 640px) 240px, 350px"
+            alt="Readimus calendar showing books by reading date"
+            width="768"
+            height="1665"
+            loading="lazy"
+          />
         </div>
       </div>
     </article>
@@ -180,7 +188,15 @@
       </div>
       <div class="visual-wrap visual-coral">
         <div class="phone-shell image-phone">
-          <img src="/product/feed-light.jpg" alt="Readimus feed with reviews and reading activity" width="768" height="1665" loading="lazy" />
+          <img
+            src="/product/feed-light.webp"
+            srcset="/product/feed-light-448.webp 448w, /product/feed-light.webp 768w"
+            sizes="(max-width: 640px) 240px, 350px"
+            alt="Readimus feed with reviews and reading activity"
+            width="768"
+            height="1665"
+            loading="lazy"
+          />
         </div>
       </div>
     </article>
@@ -221,7 +237,7 @@
   </section>
 
   <section class="finish shell" aria-labelledby="finish-title">
-    <img src="/brand/readimus-mark-transparent.png" alt="" width="64" height="64" />
+    <img src="/brand/readimus-mark-128.webp" alt="" width="64" height="64" />
     <h2 id="finish-title">Enjoy your reading journey.</h2>
     <p>Explore Readimus as a guest. Create an account when you’re ready to unlock all personal features.</p>
     <a class="button button-primary" href="/">Start</a>

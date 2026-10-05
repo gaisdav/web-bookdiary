@@ -9,6 +9,11 @@ export const handle: Handle = ({ event, resolve }) =>
 	resolve(event, {
 		transformPageChunk: ({ html }) => {
 			const own = html.replace(DEFAULTS, '');
-			return /<title[\s>]/.test(own) ? own : html.replace(/<!-- \/?seo-defaults[^>]*-->\n?/g, '');
+			const withPageSeo = /<title[\s>]/.test(own)
+				? own
+				: html.replace(/<!-- \/?seo-defaults[^>]*-->\n?/g, '');
+			const language = event.url.pathname.startsWith('/ru/') ? 'ru' : 'en';
+
+			return withPageSeo.replace('__HTML_LANG__', language);
 		}
 	});

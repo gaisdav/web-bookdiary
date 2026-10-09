@@ -219,19 +219,6 @@
     box-shadow: var(--shadow-sm);
   }
 
-  /* Not released yet: outlined and flat, so it never reads as a live button. */
-  span.store-button {
-    border-style: dashed;
-    border-color: var(--color-border-dark);
-    background: transparent;
-    color: var(--text-muted);
-    box-shadow: none;
-  }
-
-  span.store-button small {
-    opacity: 1;
-  }
-
   a.store-button {
     transition: transform var(--timing-fast) ease, box-shadow var(--timing-fast) ease, background var(--timing-fast) ease;
   }

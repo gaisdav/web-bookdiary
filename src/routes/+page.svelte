@@ -1,6 +1,7 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import SiteHeader from "$lib/components/SiteHeader.svelte";
+  import { googlePlayUrl } from "$lib/storeLinks";
 </script>
 
 <svelte:head>
@@ -26,15 +27,12 @@
       <p class="hero-description">
         Track your books, follow your friends, and discover what to read next.
       </p>
-      <div class="store-actions" aria-label="App availability">
+      <div class="store-actions" role="group" aria-label="App availability">
         <span class="store-button">
           <small>Coming soon on the</small>
           App Store
         </span>
-        <a
-          class="store-button"
-          href="https://play.google.com/store/apps/details?id=com.appbookdiary"
-        >
+        <a class="store-button" href={googlePlayUrl("hero")}>
           <small>Available on</small>
           Google Play
         </a>
@@ -138,12 +136,12 @@
   <section class="final-cta shell">
     <h2>Your books deserve more than a list.</h2>
     <p>Available now on Android. Coming soon to iOS.</p>
-    <div class="store-actions centered">
-      <span class="store-button"><small>For iPhone and iPad</small>App Store</span>
-      <a
-        class="store-button"
-        href="https://play.google.com/store/apps/details?id=com.appbookdiary"
-      >
+    <div class="store-actions centered" role="group" aria-label="App availability">
+      <span class="store-button">
+        <small>Coming soon on the</small>
+        App Store
+      </span>
+      <a class="store-button" href={googlePlayUrl("cta")}>
         <small>Available on</small>
         Google Play
       </a>
@@ -221,8 +219,32 @@
     box-shadow: var(--shadow-sm);
   }
 
+  /* Not released yet: outlined and flat, so it never reads as a live button. */
+  span.store-button {
+    border-style: dashed;
+    border-color: var(--color-border-dark);
+    background: transparent;
+    color: var(--text-muted);
+    box-shadow: none;
+  }
+
+  span.store-button small {
+    opacity: 1;
+  }
+
+  a.store-button {
+    transition: transform var(--timing-fast) ease, box-shadow var(--timing-fast) ease, background var(--timing-fast) ease;
+  }
+
   a.store-button:hover {
-    color: white;
+    background: #005866;
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+  }
+
+  a.store-button:active {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(0);
   }
 
   .store-button small {

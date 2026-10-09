@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
 	import { env } from '$env/dynamic/public';
+	import { googlePlayUrl } from '$lib/storeLinks';
 
-	const { PUBLIC_APP_STORE_URL, PUBLIC_GOOGLE_PLAY_URL, PUBLIC_IOS_APP_ID } = env;
+	const { PUBLIC_APP_STORE_URL, PUBLIC_IOS_APP_ID } = env;
 </script>
 
 <svelte:head>
@@ -31,9 +32,7 @@
 			{#if PUBLIC_APP_STORE_URL}
 				<a href={PUBLIC_APP_STORE_URL} class="store-link">Download on the App Store</a>
 			{/if}
-			{#if PUBLIC_GOOGLE_PLAY_URL}
-				<a href={PUBLIC_GOOGLE_PLAY_URL} class="store-link">Get it on Google Play</a>
-			{/if}
+			<a href={googlePlayUrl('profile')} class="store-link">Get it on Google Play</a>
 		</div>
 	</div>
 

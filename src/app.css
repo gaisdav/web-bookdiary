@@ -165,7 +165,7 @@ a:hover { color: var(--color-text); }
 button, input { font: inherit; }
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }
-:focus-visible { outline: 3px solid rgb(10 132 255 / 40%); outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 
 .shell { width: min(calc(100% - 40px), var(--content-width)); margin-inline: auto; }
 .eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-primary-dark); }

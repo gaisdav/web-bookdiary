@@ -1,6 +1,7 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import SiteHeader from "$lib/components/SiteHeader.svelte";
+  import { googlePlayUrl } from "$lib/storeLinks";
 </script>
 
 <svelte:head>
@@ -26,15 +27,15 @@
       <p class="hero-description">
         Track your books, follow your friends, and discover what to read next.
       </p>
-      <div class="store-actions" aria-label="App availability">
+      <div class="store-actions" role="group" aria-label="App availability">
         <span class="store-button">
           <small>Coming soon on the</small>
           App Store
         </span>
-        <span class="store-button">
-          <small>Coming soon on</small>
+        <a class="store-button" href={googlePlayUrl("hero")}>
+          <small>Available on</small>
           Google Play
-        </span>
+        </a>
       </div>
     </div>
 
@@ -134,10 +135,16 @@
 
   <section class="final-cta shell">
     <h2>Your books deserve more than a list.</h2>
-    <p>Readimus is coming soon to iOS and Android.</p>
-    <div class="store-actions centered">
-      <span class="store-button"><small>For iPhone and iPad</small>App Store</span>
-      <span class="store-button"><small>For Android</small>Google Play</span>
+    <p>Available now on Android. Coming soon to iOS.</p>
+    <div class="store-actions centered" role="group" aria-label="App availability">
+      <span class="store-button">
+        <small>Coming soon on the</small>
+        App Store
+      </span>
+      <a class="store-button" href={googlePlayUrl("cta")}>
+        <small>Available on</small>
+        Google Play
+      </a>
     </div>
   </section>
 </main>
@@ -208,7 +215,16 @@
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.25;
+    text-decoration: none;
     box-shadow: var(--shadow-sm);
+  }
+
+  a.store-button {
+    transition: background var(--timing-fast) ease;
+  }
+
+  a.store-button:hover {
+    background: #005866;
   }
 
   .store-button small {

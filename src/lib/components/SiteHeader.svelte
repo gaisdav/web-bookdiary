@@ -19,7 +19,6 @@
     <nav class:open aria-label="Main navigation">
       <a href="/#features" on:click={close}>Features</a>
       <a href="/support" on:click={close}>Support</a>
-      <span class="status">Coming soon</span>
     </nav>
   </div>
 </header>
@@ -34,7 +33,6 @@
   nav { gap: 28px; font-size: 14px; font-weight: 700; }
   nav a { color: var(--color-text-secondary); text-decoration: none; }
   nav a:hover { color: var(--color-text); }
-  .status { padding: 8px 13px; border: 1px solid rgb(0 151 178 / 25%); border-radius: var(--radius-round); color: var(--color-primary-dark); background: var(--color-primary-soft); font-size: 12px; }
   .menu-button { display: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--color-background-secondary); }
   .menu-button span { display: block; width: 18px; height: 2px; margin: 5px auto; border-radius: 2px; background: var(--color-text); }
 
@@ -42,6 +40,6 @@
     .menu-button { display: block; }
     nav { position: absolute; top: 72px; right: 14px; left: 14px; display: none; flex-direction: column; align-items: stretch; gap: 4px; padding: 14px; border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); background: rgb(255 255 255 / 96%); box-shadow: var(--shadow-medium); }
     nav.open { display: flex; }
-    nav a, .status { padding: 12px 14px; }
+    nav a { padding: 12px 14px; }
   }
 </style>

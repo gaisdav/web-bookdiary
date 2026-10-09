@@ -220,18 +220,11 @@
   }
 
   a.store-button {
-    transition: transform var(--timing-fast) ease, box-shadow var(--timing-fast) ease, background var(--timing-fast) ease;
+    transition: background var(--timing-fast) ease;
   }
 
   a.store-button:hover {
     background: #005866;
-    box-shadow: var(--shadow-medium);
-    transform: translateY(-2px);
-  }
-
-  a.store-button:active {
-    box-shadow: var(--shadow-sm);
-    transform: translateY(0);
   }
 
   .store-button small {

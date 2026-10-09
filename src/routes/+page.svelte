@@ -31,10 +31,13 @@
           <small>Coming soon on the</small>
           App Store
         </span>
-        <span class="store-button">
-          <small>Coming soon on</small>
+        <a
+          class="store-button"
+          href="https://play.google.com/store/apps/details?id=com.appbookdiary"
+        >
+          <small>Available on</small>
           Google Play
-        </span>
+        </a>
       </div>
     </div>
 
@@ -134,10 +137,16 @@
 
   <section class="final-cta shell">
     <h2>Your books deserve more than a list.</h2>
-    <p>Readimus is coming soon to iOS and Android.</p>
+    <p>Available now on Android. Coming soon to iOS.</p>
     <div class="store-actions centered">
       <span class="store-button"><small>For iPhone and iPad</small>App Store</span>
-      <span class="store-button"><small>For Android</small>Google Play</span>
+      <a
+        class="store-button"
+        href="https://play.google.com/store/apps/details?id=com.appbookdiary"
+      >
+        <small>Available on</small>
+        Google Play
+      </a>
     </div>
   </section>
 </main>
@@ -208,7 +217,12 @@
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.25;
+    text-decoration: none;
     box-shadow: var(--shadow-sm);
+  }
+
+  a.store-button:hover {
+    color: white;
   }
 
   .store-button small {

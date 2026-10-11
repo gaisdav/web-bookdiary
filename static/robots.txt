@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.readimus.com/sitemap.xml
+Sitemap: https://readimus.com/sitemap.xml

@@ -2,7 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 
-	const ORIGIN = 'https://www.readimus.com';
+	const ORIGIN = 'https://readimus.com';
 
 	$: path = $page.url.pathname === '/' ? '/' : $page.url.pathname.replace(/\/$/, '');
 	$: canonical = ORIGIN + path;

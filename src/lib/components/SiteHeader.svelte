@@ -49,8 +49,12 @@
 
   @media (max-width: 680px) {
     .menu-button { display: block; }
-    nav { position: absolute; top: 72px; right: 14px; left: 14px; display: none; flex-direction: column; align-items: stretch; gap: 4px; padding: 14px; border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); background: rgb(255 255 255 / 96%); box-shadow: var(--shadow-medium); }
-    nav.open { display: flex; }
+    nav { position: absolute; top: 72px; right: 14px; left: 14px; display: flex; visibility: hidden; opacity: 0; transform: translateY(-8px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s; flex-direction: column; align-items: stretch; gap: 4px; padding: 14px; border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); background: rgb(255 255 255 / 96%); box-shadow: var(--shadow-medium); }
+    nav.open { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
     nav a { padding: 12px 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    nav, .menu-button span { transition: none; }
   }
 </style>

@@ -2,17 +2,24 @@
   export let showName = true;
 
   let open = false;
+  let header: HTMLElement;
   const close = () => (open = false);
+
+  function onWindowClick(event: MouseEvent) {
+    if (open && !header.contains(event.target as Node)) close();
+  }
 </script>
 
-<header class="site-header">
+<svelte:window on:click={onWindowClick} on:keydown={(e) => e.key === 'Escape' && close()} />
+
+<header class="site-header" bind:this={header}>
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="Readimus home" on:click={close}>
       <img src="/brand/readimus-mark-128.webp" alt="" width="42" height="42" />
       {#if showName}<span>Readimus</span>{/if}
     </a>
 
-    <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded={open} on:click={() => (open = !open)}>
+    <button class="menu-button" class:open type="button" aria-label="Toggle navigation" aria-expanded={open} on:click={() => (open = !open)}>
       <span></span><span></span>
     </button>
 
@@ -33,8 +40,12 @@
   nav { gap: 28px; font-size: 14px; font-weight: 700; }
   nav a { color: var(--color-text-secondary); text-decoration: none; }
   nav a:hover { color: var(--color-text); }
-  .menu-button { display: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--color-background-secondary); }
-  .menu-button span { display: block; width: 18px; height: 2px; margin: 5px auto; border-radius: 2px; background: var(--color-text); }
+  .menu-button { position: relative; display: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--color-background-secondary); }
+  .menu-button span { position: absolute; top: 50%; left: 50%; width: 18px; height: 2px; margin: -1px 0 0 -9px; border-radius: 2px; background: var(--color-text); transition: transform 0.25s ease; }
+  .menu-button span:first-child { transform: translateY(-3.5px); }
+  .menu-button span:last-child { transform: translateY(3.5px); }
+  .menu-button.open span:first-child { transform: rotate(45deg); }
+  .menu-button.open span:last-child { transform: rotate(-45deg); }
 
   @media (max-width: 680px) {
     .menu-button { display: block; }

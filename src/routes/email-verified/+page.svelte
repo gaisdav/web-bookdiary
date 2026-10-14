@@ -1,28 +1,31 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { env } from '$env/dynamic/public';
 	import type { EmailOtpType } from '@supabase/supabase-js';
 	import { supabase } from '$lib/supabase';
-	import AppLinks from '$lib/components/AppLinks.svelte';
+	import { APP_OPEN_URL } from '$lib/appScheme';
+	import { googlePlayUrl } from '$lib/storeLinks';
 	import Footer from '$lib/components/Footer.svelte';
 
-	// Password recovery is deliberately absent: it belongs to /reset-password, and
-	// verifying it here would burn the one-time token before that page sees it.
-	const SUPPORTED_TYPES = ['signup', 'email', 'email_change'] as const;
+	// The signup confirmation email links here with a `token_hash`. Where the
+	// Readimus app is installed it claims this path (AASA / Android
+	// intent-filter) and confirms the address itself, so this page is what
+	// everyone else gets: no app on this device, or a browser that keeps links
+	// to itself.
+	//
+	// The same two types the app accepts. `recovery` is absent on purpose: it
+	// belongs to /reset-password, and verifying it here would burn the one-time
+	// token before that page ever sees it.
+	const SUPPORTED_TYPES: EmailOtpType[] = ['signup', 'email'];
+	const INVALID_LINK = 'This confirmation link is invalid, expired, or was already used.';
+
+	const { PUBLIC_APP_STORE_URL } = env;
 
 	let status: 'verifying' | 'verified' | 'error' = 'verifying';
 	let errorMessage = '';
 
 	onMount(async () => {
-		const tokenHash = $page.url.searchParams.get('token_hash');
-
-		// Links from the old email template are verified by Supabase itself before
-		// it redirects here, so there is no token left to exchange.
-		if (!tokenHash) {
-			status = 'verified';
-			return;
-		}
-
 		if (!supabase) {
 			errorMessage =
 				'Supabase is not configured. Please set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in your .env file.';
@@ -30,34 +33,50 @@
 			return;
 		}
 
-		const typeParam = $page.url.searchParams.get('type') ?? 'signup';
-		if (!SUPPORTED_TYPES.includes(typeParam as (typeof SUPPORTED_TYPES)[number])) {
+		const tokenHash = $page.url.searchParams.get('token_hash');
+
+		if (!tokenHash) {
+			// An email sent under the old template went through Supabase's own
+			// verify endpoint first, which put the outcome in the fragment.
+			const fragment = new URLSearchParams($page.url.hash.slice(1));
+			if (fragment.get('error') || fragment.get('error_code')) {
+				errorMessage = INVALID_LINK;
+				status = 'error';
+				return;
+			}
+			// supabase-js has already stored the session that fragment carried.
+			await supabase.auth.signOut({ scope: 'local' });
+			status = 'verified';
+			return;
+		}
+
+		const type = ($page.url.searchParams.get('type') ?? 'signup') as EmailOtpType;
+		if (!SUPPORTED_TYPES.includes(type)) {
 			errorMessage = 'This link is not an email confirmation link.';
 			status = 'error';
 			return;
 		}
 
-		const { error } = await supabase.auth.verifyOtp({
-			token_hash: tokenHash,
-			type: typeParam as EmailOtpType
-		});
+		const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
 
 		if (error) {
-			errorMessage = 'This confirmation link is invalid, expired, or was already used.';
+			errorMessage = INVALID_LINK;
 			status = 'error';
 			return;
 		}
 
-		// The web app has no signed-in UI; don't leave a session behind in a browser
-		// that may not belong to the user.
-		await supabase.auth.signOut();
+		// The site has no signed-in UI, so don't leave a session behind in a
+		// browser that may not belong to the user. 'local' ends only this one:
+		// the default would sign the account out everywhere, the app included.
+		await supabase.auth.signOut({ scope: 'local' });
 		status = 'verified';
 	});
 </script>
 
 <svelte:head>
-	<title>Verification Successful - BookDiary</title>
-	<meta name="description" content="Email verified successfully" />
+	<title>Confirm Your Email - Readimus</title>
+	<meta name="robots" content="noindex" />
+	<meta name="description" content="Confirm the email address of your Readimus account" />
 </svelte:head>
 
 <div class="container">
@@ -65,30 +84,30 @@
 		{#if status === 'verifying'}
 			<p class="icon">⏳</p>
 			<h1>Confirming your email…</h1>
-			<p>One moment while we verify your link.</p>
+			<p>One moment while we check your link.</p>
 		{:else if status === 'error'}
 			<p class="icon">⚠️</p>
 			<h1>Confirmation failed</h1>
 			<p>{errorMessage}</p>
-			<p>Request a new confirmation email from the BookDiary app and try again.</p>
+			<p>
+				Already confirmed it? Just sign in to the Readimus app. Otherwise, request a new
+				confirmation email from the app and try again.
+			</p>
 		{:else}
 			<p class="icon">✅</p>
 			<h1>Email Verified!</h1>
+			<p>Your email address has been successfully verified.</p>
+			<p>Thank you for registering with Readimus.</p>
+			<p>Open the app and sign in to start exploring your personal book diary.</p>
 
-			<p>
-				Your email address has been successfully verified.
-			</p>
-			<p>
-				Thank you for registering with BookDiary.
-			</p>
-			<p>
-				Open the BookDiary app to log in and start exploring your personal book diary.
-			</p>
+			<div class="app-links">
+				<a href={APP_OPEN_URL} class="app-link">Open Readimus</a>
+				{#if PUBLIC_APP_STORE_URL}
+					<a href={PUBLIC_APP_STORE_URL} class="store-link">Download on the App Store</a>
+				{/if}
+				<a href={googlePlayUrl('email-verified')} class="store-link">Get it on Google Play</a>
+			</div>
 		{/if}
-
-		<!-- Outside the {#if} so the Smart App Banner ships in the prerendered HTML,
-		     where Safari can still act on it. -->
-		<AppLinks />
 	</div>
 
 	<Footer />
@@ -125,5 +144,35 @@
 	p {
 		margin-bottom: var(--spacing-md);
 		line-height: var(--line-height-lg);
+	}
+
+	.app-links {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-md);
+		margin-top: var(--spacing-lg);
+	}
+
+	.app-link,
+	.store-link {
+		padding: var(--spacing-sm) var(--spacing-lg);
+		border-radius: var(--radius-md);
+		text-decoration: none;
+		font-weight: 600;
+		transition: background-color var(--timing-fast) ease;
+	}
+
+	.app-link {
+		background-color: var(--color-primary-dark);
+		color: var(--color-text-inverse);
+	}
+
+	.store-link {
+		background-color: var(--color-primary-soft);
+		color: var(--color-primary-dark);
+	}
+
+	.store-link:hover {
+		background-color: var(--color-border);
 	}
 </style>

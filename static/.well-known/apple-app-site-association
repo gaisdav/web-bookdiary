@@ -8,8 +8,14 @@
             "/": "/book/*",
             "comment": "Book screen deep links"
           },
-          { "/": "/user/*/list/*", "comment": "Shared list deep links" },
-          { "/": "/email-verified*", "comment": "Post-signup email confirmation deep link" }
+          {
+            "/": "/user/*",
+            "comment": "Profiles and the list links nested under them (/user/<id>/list/<id>)"
+          },
+          {
+            "/": "/email-verified*",
+            "comment": "Signup confirmation: the app confirms the email itself (token_hash in the query)"
+          }
         ]
       }
     ]

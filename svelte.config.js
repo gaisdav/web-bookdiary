@@ -5,6 +5,9 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
+		// Inlines the header and footer stylesheets, which sit just under 2 KB,
+		// removing two render-blocking requests from every page load.
+		inlineStyleThreshold: 2048,
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',

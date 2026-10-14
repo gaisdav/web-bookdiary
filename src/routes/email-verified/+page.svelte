@@ -22,14 +22,37 @@
 
 	const { PUBLIC_APP_STORE_URL } = env;
 
-	let status: 'verifying' | 'verified' | 'error' = 'verifying';
+	// 'retry': Supabase never refused the link, so its token is most likely
+	// unspent and trying again can still work.
+	let status: 'verifying' | 'verified' | 'failed' | 'retry' = 'verifying';
 	let errorMessage = '';
 
-	onMount(async () => {
+	// Supabase refusing the link outright: `otp_expired` (expired, already used
+	// or never issued — it reports all three that way) or any other 4xx but a
+	// rate limit. No answer, a 5xx or a 429 says nothing about the link itself.
+	// The app draws the same line (isEmailLinkRejectedError).
+	function isLinkRejected(error: { code?: string; status?: number }): boolean {
+		return (
+			error.code === 'otp_expired' ||
+			(error.status !== undefined &&
+				error.status >= 400 &&
+				error.status < 500 &&
+				error.status !== 429)
+		);
+	}
+
+	function fail(message: string) {
+		errorMessage = message;
+		status = 'failed';
+	}
+
+	async function confirm() {
+		status = 'verifying';
+
 		if (!supabase) {
-			errorMessage =
-				'Supabase is not configured. Please set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in your .env file.';
-			status = 'error';
+			fail(
+				'Supabase is not configured. Please set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in your .env file.'
+			);
 			return;
 		}
 
@@ -37,11 +60,20 @@
 
 		if (!tokenHash) {
 			// An email sent under the old template went through Supabase's own
-			// verify endpoint first, which put the outcome in the fragment.
+			// verify endpoint first, which put the outcome in the fragment. Read
+			// from $page.url, captured on load: supabase-js clears the live hash
+			// once it has taken the session out of it.
 			const fragment = new URLSearchParams($page.url.hash.slice(1));
 			if (fragment.get('error') || fragment.get('error_code')) {
-				errorMessage = INVALID_LINK;
-				status = 'error';
+				fail(INVALID_LINK);
+				return;
+			}
+			// Neither a token nor an outcome: the page was opened by hand, or a
+			// mail client cut the link short. Nothing was confirmed.
+			if (!fragment.get('access_token')) {
+				fail(
+					'This link is incomplete. Open the confirmation link from the email again, and if you copied it by hand, make sure you copied all of it.'
+				);
 				return;
 			}
 			// supabase-js has already stored the session that fragment carried.
@@ -52,16 +84,26 @@
 
 		const type = ($page.url.searchParams.get('type') ?? 'signup') as EmailOtpType;
 		if (!SUPPORTED_TYPES.includes(type)) {
-			errorMessage = 'This link is not an email confirmation link.';
-			status = 'error';
+			fail('This link is not an email confirmation link.');
 			return;
 		}
 
-		const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+		let error: { code?: string; status?: number } | null;
+		try {
+			({ error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type }));
+		} catch {
+			// supabase-js returns its own errors; what it throws never reached
+			// Supabase at all.
+			status = 'retry';
+			return;
+		}
 
 		if (error) {
-			errorMessage = INVALID_LINK;
-			status = 'error';
+			if (isLinkRejected(error)) {
+				fail(INVALID_LINK);
+			} else {
+				status = 'retry';
+			}
 			return;
 		}
 
@@ -70,7 +112,9 @@
 		// the default would sign the account out everywhere, the app included.
 		await supabase.auth.signOut({ scope: 'local' });
 		status = 'verified';
-	});
+	}
+
+	onMount(confirm);
 </script>
 
 <svelte:head>
@@ -85,7 +129,15 @@
 			<p class="icon">⏳</p>
 			<h1>Confirming your email…</h1>
 			<p>One moment while we check your link.</p>
-		{:else if status === 'error'}
+		{:else if status === 'retry'}
+			<p class="icon">⚠️</p>
+			<h1>Couldn't confirm right now</h1>
+			<p>
+				We couldn't get an answer from the server. Your link should still work, so give it
+				another go in a moment.
+			</p>
+			<button type="button" class="app-link" on:click={confirm}>Try again</button>
+		{:else if status === 'failed'}
 			<p class="icon">⚠️</p>
 			<h1>Confirmation failed</h1>
 			<p>{errorMessage}</p>
@@ -165,6 +217,13 @@
 	.app-link {
 		background-color: var(--color-primary-dark);
 		color: var(--color-text-inverse);
+	}
+
+	button.app-link {
+		border: none;
+		font: inherit;
+		font-weight: 600;
+		cursor: pointer;
 	}
 
 	.store-link {

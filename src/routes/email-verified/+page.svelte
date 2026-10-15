@@ -23,9 +23,13 @@
 	const { PUBLIC_APP_STORE_URL } = env;
 
 	// 'retry': Supabase never refused the link, so its token is most likely
-	// unspent and trying again can still work.
-	let status: 'verifying' | 'verified' | 'failed' | 'retry' = 'verifying';
+	// unspent and trying again can still work. 'halfway': the first of the two
+	// links an email change sends was accepted (see confirm()).
+	let status: 'verifying' | 'verified' | 'halfway' | 'failed' | 'retry' = 'verifying';
 	let errorMessage = '';
+	// The app's email change from Settings lands here as well, through the
+	// Site URL; its success should not thank the user for registering.
+	let isEmailChange = false;
 
 	// Supabase refusing the link outright: `otp_expired` (expired, already used
 	// or never issued — it reports all three that way) or any other 4xx but a
@@ -68,17 +72,26 @@
 				fail(INVALID_LINK);
 				return;
 			}
-			// Neither a token nor an outcome: the page was opened by hand, or a
-			// mail client cut the link short. Nothing was confirmed.
-			if (!fragment.get('access_token')) {
-				fail(
-					'This link is incomplete. Open the confirmation link from the email again, and if you copied it by hand, make sure you copied all of it.'
-				);
+			if (fragment.get('access_token')) {
+				// supabase-js has already stored the session that fragment carried.
+				await supabase.auth.signOut({ scope: 'local' });
+				isEmailChange = fragment.get('type') === 'email_change';
+				status = 'verified';
 				return;
 			}
-			// supabase-js has already stored the session that fragment carried.
-			await supabase.auth.signOut({ scope: 'local' });
-			status = 'verified';
+			// With Secure Email Change on, an email change sends two links, and
+			// the first one comes back with no session, only
+			// `#message=Confirmation link accepted…`. Only its presence is read:
+			// a link can carry any text there, so it is never shown.
+			if (fragment.get('message')) {
+				status = 'halfway';
+				return;
+			}
+			// Neither a token nor an outcome: the page was opened by hand, or a
+			// mail client cut the link short. Nothing was confirmed.
+			fail(
+				'This link is incomplete. Open the confirmation link from the email again, and if you copied it by hand, make sure you copied all of it.'
+			);
 			return;
 		}
 
@@ -137,6 +150,14 @@
 				another go in a moment.
 			</p>
 			<button type="button" class="app-link" on:click={confirm}>Try again</button>
+		{:else if status === 'halfway'}
+			<p class="icon">📩</p>
+			<h1>One more step</h1>
+			<p>We've accepted this confirmation.</p>
+			<p>
+				To finish changing your email, open the link we sent to your other email address as
+				well.
+			</p>
 		{:else if status === 'failed'}
 			<p class="icon">⚠️</p>
 			<h1>Confirmation failed</h1>
@@ -148,9 +169,14 @@
 		{:else}
 			<p class="icon">✅</p>
 			<h1>Email Verified!</h1>
-			<p>Your email address has been successfully verified.</p>
-			<p>Thank you for registering with Readimus.</p>
-			<p>Open the app and sign in to start exploring your personal book diary.</p>
+			{#if isEmailChange}
+				<p>Your new email address is confirmed.</p>
+				<p>From now on, sign in to Readimus with it.</p>
+			{:else}
+				<p>Your email address has been successfully verified.</p>
+				<p>Thank you for registering with Readimus.</p>
+				<p>Open the app and sign in to start exploring your personal book diary.</p>
+			{/if}
 
 			<div class="app-links">
 				<a href={APP_OPEN_URL} class="app-link">Open Readimus</a>

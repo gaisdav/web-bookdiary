@@ -11,6 +11,10 @@
           {
             "/": "/user/*",
             "comment": "Profiles and the list links nested under them (/user/<id>/list/<id>)"
+          },
+          {
+            "/": "/email-verified",
+            "comment": "Signup confirmation: the app confirms the email itself (token_hash in the query)"
           }
         ]
       }

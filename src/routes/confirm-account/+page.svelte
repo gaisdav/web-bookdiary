@@ -19,6 +19,7 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
+  import { APP_OPEN_URL } from "$lib/appScheme";
   import Footer from "$lib/components/Footer.svelte";
 
   let loading = true;
@@ -47,6 +48,18 @@
       subscription.unsubscribe();
     }
   });
+
+  // The guest started this in the app, on a phone almost certainly the same
+  // one, so hand them straight back to it — the app notices the account is
+  // no longer a guest the moment it is in the foreground again. iOS asks
+  // first ("Open in Readimus?"). A desktop has no app to open, so it is not
+  // tried there, and the button covers a browser that will not navigate
+  // without a fresh tap.
+  function returnToApp() {
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.location.href = APP_OPEN_URL;
+    }
+  }
 
   function checkSession() {
     if (!browser || !supabase) return;
@@ -124,6 +137,7 @@
       await supabase.auth.signOut({ scope: "local" });
       success = true;
       showForm = false;
+      returnToApp();
     } catch (err) {
       error = "An unexpected error occurred.";
     } finally {
@@ -193,10 +207,11 @@
       <div class="message message-success">
         <p>✅ Your account is ready!</p>
         <p>
-          You can now close this window and log in to the Readimus app with
-          your email and password.
+          Go back to the Readimus app: it switches to your new account on its
+          own, and everything you added as a guest is still there.
         </p>
       </div>
+      <a class="open-app" href={APP_OPEN_URL}>Open Readimus</a>
     {/if}
   </div>
 
@@ -312,5 +327,17 @@
   .message-error {
     background-color: var(--color-error-light);
     color: var(--color-error);
+  }
+
+  .open-app {
+    display: block;
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
   }
 </style>

@@ -7,6 +7,9 @@
   export let eyebrow: string;
   export let title: string;
   export let intro: string;
+  /** For a page whose header changes in place (a status page): read the
+   *  change out to screen readers. */
+  export let live = false;
 </script>
 
 <svelte:head>
@@ -18,7 +21,8 @@
 
 <SiteHeader />
 <main class="info shell">
-  <header>
+  <header aria-live={live ? "polite" : undefined}>
+    {#if $$slots.mark}<div class="mark"><slot name="mark" /></div>{/if}
     <p class="eyebrow">{eyebrow}</p>
     <h1>{title}</h1>
     <p class="intro">{intro}</p>
@@ -30,6 +34,7 @@
 <style>
   .info { max-width: 1000px; padding-top: 88px; padding-bottom: 120px; }
   header { max-width: 790px; margin-bottom: 58px; }
+  .mark { margin-bottom: 26px; }
   h1 { margin: 15px 0 22px; font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6.5rem); line-height: 0.93; letter-spacing: -0.065em; }
   .intro { margin: 0; color: var(--text-muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.65; }
   .content { display: grid; gap: 18px; }

@@ -1,91 +1,29 @@
 <script lang="ts">
-  import Footer from "$lib/components/Footer.svelte";
+  import InfoLayout from "$lib/components/InfoLayout.svelte";
 
   const supportEmail = "support@readimus.com";
 </script>
 
-<svelte:head>
-  <title>Contacts - Readimus Support</title>
-  <meta name="description" content="Contact Readimus support" />
-  <meta property="og:title" content="Contacts - Readimus Support" />
-  <meta property="og:description" content="Contact Readimus support" />
-</svelte:head>
-
-<div class="container">
-  <div class="card">
-    <h1>Contact Us</h1>
-    <p class="subtitle">We're here to help with your Readimus journey.</p>
-
-    <p>
-      If you have any questions, feedback, or need technical support regarding
-      the Readimus application, please don't hesitate to reach out. We aim to
-      respond to all inquiries as quickly as possible.
-    </p>
-
-    <div class="contact-info">
-      <p>
-        For all support and general questions, please use the following email
-        address:
-      </p>
-
-      <a href="mailto:{supportEmail}" class="contact-link">
-        {supportEmail}
-      </a>
-    </div>
+<InfoLayout
+  pageTitle="Contact"
+  description="How to reach the Readimus team."
+  eyebrow="Contact"
+  title="Write to us."
+  intro="Questions, feedback, or something not working in the app? Send us an email and we’ll get back to you as soon as we can."
+>
+  <section class="card card-accent">
+    <h2>Email</h2>
+    <p>One address for everything: support, feedback and account questions. Please never send your password.</p>
+    <a class="mail-button" href="mailto:{supportEmail}">{supportEmail}</a>
+  </section>
+  <div class="grid">
+    <section class="card">
+      <h3>Looking for a quick answer?</h3>
+      <p>Common problems and what to do about them are on our <a href="/support">Support</a> page.</p>
+    </section>
+    <section class="card">
+      <h3>Reporting a copyright issue?</h3>
+      <p>Our <a href="/copyright">Copyright</a> page lists what a notice needs to include.</p>
+    </section>
   </div>
-
-  <Footer />
-</div>
-
-<style>
-  .container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: var(--spacing-xxl) var(--spacing-md);
-    text-align: center;
-  }
-
-  .card {
-    background-color: var(--color-tab-bar);
-    padding: var(--spacing-xxl);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-medium);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  h1 {
-    color: var(--color-primary);
-    font-size: var(--font-size-xxxl);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .subtitle {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  p {
-    margin-bottom: var(--spacing-md);
-    line-height: var(--line-height-lg);
-  }
-
-  .contact-info {
-    margin-top: var(--spacing-lg);
-    font-size: var(--font-size-lg);
-  }
-
-  .contact-link {
-    display: block;
-    margin-top: var(--spacing-md);
-    font-weight: 600;
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: color var(--timing-fast) ease;
-  }
-
-  .contact-link:hover {
-    color: var(--color-primary-dark);
-    text-decoration: underline;
-  }
-</style>
+</InfoLayout>

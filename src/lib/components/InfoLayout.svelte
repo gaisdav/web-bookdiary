@@ -47,8 +47,20 @@
   .content :global(p) { margin: 0; }
   .content :global(ol), .content :global(ul) { margin: 14px 0 0; padding-left: 22px; }
   .content :global(li) { margin-bottom: 8px; padding-left: 4px; }
-  .content :global(a) { color: var(--accent-dark); font-weight: 700; }
+  /* Text links only: a button keeps the label colour app.css gives it. */
+  .content :global(a:not(.button):not(.mail-button)) { color: var(--accent-dark); font-weight: 700; }
   .content :global(.mail-button) { display: inline-flex; margin-top: 22px; padding: 13px 18px; border-radius: 999px; background: var(--text); color: white; text-decoration: none; }
+  .content :global(.actions) { display: flex; flex-wrap: wrap; gap: 12px; }
+  .content :global(* + .actions) { margin-top: 22px; }
+  .content :global(.button:disabled) { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+  /* Forms (the password pages). */
+  .content :global(.form-card) { width: 100%; max-width: 520px; }
+  .content :global(form) { display: grid; gap: 18px; }
+  .content :global(label) { display: block; margin-bottom: 8px; font-weight: 700; }
+  .content :global(input) { width: 100%; min-height: 50px; padding: 0 16px; border: 1px solid var(--color-input-border); border-radius: 14px; background: var(--color-input-background); color: var(--text); transition: border-color var(--timing-fast) ease; }
+  .content :global(input:focus) { border-color: var(--primary); }
+  .content :global(input:disabled) { opacity: 0.6; cursor: not-allowed; }
+  .content :global(.alert) { padding: 12px 16px; border-radius: 14px; background: var(--color-error-light); color: var(--color-error-dark); line-height: 1.5; }
   @media (max-width: 650px) {
     .info { padding-top: 56px; padding-bottom: 80px; }
     .content :global(.grid) { grid-template-columns: 1fr; }

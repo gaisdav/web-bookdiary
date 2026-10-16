@@ -2,7 +2,9 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
-  import Footer from "$lib/components/Footer.svelte";
+  import { APP_OPEN_URL } from "$lib/appScheme";
+  import InfoLayout from "$lib/components/InfoLayout.svelte";
+  import StatusMark from "$lib/components/StatusMark.svelte";
 
   let loading = true;
   let error = "";
@@ -106,182 +108,123 @@
       isSubmitting = false;
     }
   }
+
+  type TStep = "checking" | "form" | "done" | "failed";
+  type THeader = { eyebrow: string; title: string; intro: string };
+
+  // The header says where the page is: checking the link, the form, done, or
+  // a link that didn't work. A failed submit keeps the form up (see
+  // handleSubmit) and shows its error inside it.
+  $: step = (loading ? "checking" : success ? "done" : showForm ? "form" : "failed") as TStep;
+
+  function headerFor(current: TStep, message: string): THeader {
+    switch (current) {
+      case "checking":
+        return {
+          eyebrow: "Password reset",
+          title: "Checking your link…",
+          intro: "This only takes a moment.",
+        };
+      case "form":
+        return {
+          eyebrow: "Password reset",
+          title: "Choose a new password.",
+          intro: "Use at least 6 characters. From now on, you’ll sign in to Readimus with it.",
+        };
+      case "done":
+        return {
+          eyebrow: "Password updated",
+          title: "You’re all set.",
+          intro: "Your password has been changed. Sign in to Readimus with your new password.",
+        };
+      case "failed":
+        return { eyebrow: "Password reset", title: "This link didn’t work.", intro: message };
+    }
+  }
+
+  $: header = headerFor(step, error);
+  const ICONS = { checking: "spinner", form: "lock", done: "check", failed: "alert" } as const;
 </script>
 
 <svelte:head>
-  <title>Readimus - Reset Password</title>
-  <meta name="description" content="Reset your Readimus password" />
+  <meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="container">
-  <div class="card">
-    <h2>Reset Your Password</h2>
+<InfoLayout
+  pageTitle="Reset password"
+  description="Reset your Readimus password."
+  eyebrow={header.eyebrow}
+  title={header.title}
+  intro={header.intro}
+  live
+>
+  <svelte:fragment slot="mark">
+    <StatusMark icon={ICONS[step]} tone={step === "failed" ? "error" : "brand"} />
+  </svelte:fragment>
 
-    {#if loading}
-      <div class="message message-info">Checking session...</div>
-    {/if}
-
-    {#if error}
-      <div class="message message-error">
-        {error}
-      </div>
-    {/if}
-
-    {#if showForm}
+  {#if step === "form"}
+    <section class="card form-card">
       <form on:submit|preventDefault={handleSubmit}>
-        <div class="message message-info">Enter your new password below.</div>
-
+        {#if error}
+          <p class="alert" role="alert">{error}</p>
+        {/if}
         {#if formError}
-          <div class="message message-error">
-            {formError}
-          </div>
+          <p class="alert" role="alert">{formError}</p>
         {/if}
 
-        <label for="password">New Password</label>
-        <input
-          type="password"
-          id="password"
-          bind:value={password}
-          required
-          minlength="6"
-          disabled={isSubmitting}
-        />
+        <div>
+          <label for="password">New password</label>
+          <input
+            type="password"
+            id="password"
+            autocomplete="new-password"
+            bind:value={password}
+            required
+            minlength="6"
+            disabled={isSubmitting}
+          />
+        </div>
 
-        <label for="confirm_password">Confirm Password</label>
-        <input
-          type="password"
-          id="confirm_password"
-          bind:value={confirmPassword}
-          required
-          minlength="6"
-          disabled={isSubmitting}
-        />
+        <div>
+          <label for="confirm_password">Confirm password</label>
+          <input
+            type="password"
+            id="confirm_password"
+            autocomplete="new-password"
+            bind:value={confirmPassword}
+            required
+            minlength="6"
+            disabled={isSubmitting}
+          />
+        </div>
 
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Updating..." : "Set New Password"}
+        <button type="submit" class="button button-primary" disabled={isSubmitting}>
+          {isSubmitting ? "Saving…" : "Set new password"}
         </button>
       </form>
-    {/if}
-
-    {#if success}
-      <div class="message message-success">
-        <p>✅ Your password has been successfully updated!</p>
-        <p>You can now close this window and log in to the Readimus app.</p>
+    </section>
+  {:else if step === "done"}
+    <section class="card card-accent">
+      <h2>Continue in the app</h2>
+      <p>Open Readimus on your phone and sign in with your email and new password.</p>
+      <div class="actions">
+        <a class="button button-primary" href={APP_OPEN_URL}>Open Readimus</a>
       </div>
-    {/if}
-  </div>
-
-  <Footer />
-</div>
+    </section>
+  {:else if step === "failed"}
+    <section class="card">
+      <h2>What to do next</h2>
+      <ul>
+        <li>Need a new link? On the Readimus sign-in screen, tap “Forgot password?” and open the newest email.</li>
+        <li>Already changed your password? Then you’re done: sign in with it.</li>
+      </ul>
+      <p class="help">Still stuck? <a href="/support">Get help</a></p>
+    </section>
+  {/if}
+</InfoLayout>
 
 <style>
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
-    padding: var(--spacing-xxl) var(--spacing-md);
-  }
-
-  .card {
-    width: 100%;
-    max-width: 400px;
-    background-color: var(--color-tab-bar);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-medium);
-  }
-
-  h2 {
-    color: var(--color-primary);
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--font-size-xxl);
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  label {
-    display: block;
-    margin-bottom: var(--spacing-sm);
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  input[type="password"] {
-    width: 100%;
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    border: 1px solid var(--color-input-border);
-    border-radius: var(--radius-sm);
-    background-color: var(--color-input-background);
-    color: var(--color-text);
-    transition: border-color var(--timing-fast) ease;
-  }
-
-  input[type="password"]:focus {
-    border-color: var(--color-primary);
-    outline: none;
-  }
-
-  input[type="password"]:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  button {
-    width: 100%;
-    padding: var(--spacing-md);
-    background-color: var(--color-primary);
-    color: var(--color-text-inverse);
-    border: none;
-    border-radius: var(--radius-sm);
-    font-size: var(--font-size-md);
-    font-weight: 700;
-    transition:
-      background-color var(--timing-fast) ease,
-      box-shadow var(--timing-fast) ease;
-  }
-
-  button:hover:not(:disabled) {
-    background-color: var(--color-primary);
-    box-shadow: var(--shadow-small);
-  }
-
-  button:disabled {
-    background-color: var(--color-text-tertiary);
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  .message {
-    margin-top: var(--spacing-md);
-    padding: var(--spacing-md);
-    border-radius: var(--radius-sm);
-    text-align: center;
-  }
-
-  .message-info {
-    background-color: var(--color-info-light);
-    color: var(--color-info);
-    font-weight: 500;
-  }
-
-  .message-success {
-    background-color: var(--color-success-light);
-    color: var(--color-success);
-  }
-
-  .message-success p {
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .message-error {
-    background-color: var(--color-error-light);
-    color: var(--color-error);
+  .help {
+    margin-top: 14px;
   }
 </style>

@@ -6,6 +6,7 @@
 	import { APP_OPEN_URL } from '$lib/appScheme';
 	import { APP_STORE_URL, googlePlayUrl } from '$lib/storeLinks';
 	import InfoLayout from '$lib/components/InfoLayout.svelte';
+	import StatusMark from '$lib/components/StatusMark.svelte';
 
 	// The signup confirmation email links here with a `token_hash`. Where the
 	// Readimus app is installed it claims this path (AASA / Android
@@ -168,8 +169,16 @@
 	}
 
 	$: header = headerFor(status, isEmailChange, errorMessage);
+	const ICONS = {
+		verifying: 'spinner',
+		verified: 'check',
+		halfway: 'mail',
+		retry: 'retry',
+		failed: 'alert'
+	} as const;
 	// The mark's colour follows the outcome: brand for progress and success,
 	// amber for "try again", red for a link that will not work.
+	let tone: 'brand' | 'warning' | 'error';
 	$: tone = status === 'failed' ? 'error' : status === 'retry' ? 'warning' : 'brand';
 </script>
 
@@ -185,26 +194,9 @@
 	intro={header.intro}
 	live
 >
-	<div slot="mark" class="status-mark {tone}" aria-hidden="true">
-		<svg viewBox="0 0 24 24">
-			{#if status === 'verifying'}
-				<circle class="spin" cx="12" cy="12" r="8" />
-			{:else if status === 'verified'}
-				<path class="draw" d="M20 6 9 17l-5-5" />
-			{:else if status === 'halfway'}
-				<rect x="3" y="5" width="18" height="14" rx="2" />
-				<path d="m21 8-7.97 5.07a2 2 0 0 1-2.06 0L3 8" />
-			{:else if status === 'retry'}
-				<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-				<path d="M21 3v5h-5" />
-				<path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-				<path d="M8 16H3v5" />
-			{:else}
-				<path d="M12 7v6" />
-				<path d="M12 17h.01" />
-			{/if}
-		</svg>
-	</div>
+	<svelte:fragment slot="mark">
+		<StatusMark icon={ICONS[status]} {tone} />
+	</svelte:fragment>
 
 	{#if status === 'verified'}
 		<section class="card card-accent">
@@ -248,71 +240,6 @@
 </InfoLayout>
 
 <style>
-	.status-mark {
-		display: grid;
-		place-items: center;
-		width: 64px;
-		height: 64px;
-		border: 1px solid #b8e7ee;
-		border-radius: 50%;
-		background: var(--primary-soft);
-		color: var(--primary-dark);
-	}
-
-	.status-mark.warning {
-		border-color: #f1d9b3;
-		background: var(--color-warning-light);
-		color: var(--color-warning);
-	}
-
-	.status-mark.error {
-		border-color: #f4cbc8;
-		background: var(--color-error-light);
-		color: var(--color-error);
-	}
-
-	svg {
-		width: 30px;
-		height: 30px;
-		fill: none;
-		stroke: currentColor;
-		stroke-width: 2.25;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-	}
-
-	/* A quarter-open ring turning while the check runs. */
-	.spin {
-		stroke-dasharray: 38 13;
-		transform-origin: center;
-		animation: spin 0.9s linear infinite;
-	}
-
-	/* The tick draws itself once, the one moment of motion on success. */
-	.draw {
-		stroke-dasharray: 24;
-		stroke-dashoffset: 24;
-		animation: draw 0.45s 0.1s ease-out forwards;
-	}
-
-	@keyframes spin {
-		to {
-			transform: rotate(360deg);
-		}
-	}
-
-	@keyframes draw {
-		to {
-			stroke-dashoffset: 0;
-		}
-	}
-
-	/* InfoLayout colours every link in its content (.content a); a button keeps
-	   its own white label. */
-	.card a.button-primary {
-		color: #fff;
-	}
-
 	.card .button {
 		margin-top: 22px;
 	}

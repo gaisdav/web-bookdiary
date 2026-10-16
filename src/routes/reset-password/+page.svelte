@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
-  import { APP_OPEN_URL } from "$lib/appScheme";
+  import { APP_LOGIN_URL } from "$lib/appScheme";
   import InfoLayout from "$lib/components/InfoLayout.svelte";
   import StatusMark from "$lib/components/StatusMark.svelte";
 
@@ -208,7 +208,7 @@
       <h2>Continue in the app</h2>
       <p>Open Readimus on your phone and sign in with your email and new password.</p>
       <div class="actions">
-        <a class="button button-primary" href={APP_OPEN_URL}>Open Readimus</a>
+        <a class="button button-primary" href={APP_LOGIN_URL}>Open Readimus</a>
       </div>
     </section>
   {:else if step === "failed"}

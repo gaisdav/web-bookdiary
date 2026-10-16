@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import type { EmailOtpType } from '@supabase/supabase-js';
 	import { supabase } from '$lib/supabase';
-	import { APP_OPEN_URL } from '$lib/appScheme';
+	import { APP_LOGIN_URL, APP_OPEN_URL } from '$lib/appScheme';
 	import { APP_STORE_URL, googlePlayUrl } from '$lib/storeLinks';
 	import InfoLayout from '$lib/components/InfoLayout.svelte';
 	import StatusMark from '$lib/components/StatusMark.svelte';
@@ -206,7 +206,8 @@
 					? 'Open Readimus: you stay signed in, and your account now uses the new address.'
 					: 'Open Readimus and sign in with the email and password you signed up with.'}
 			</p>
-			<a class="button button-primary" href={APP_OPEN_URL}>Open Readimus</a>
+			<!-- An email change leaves the user signed in: no sign-in screen to send them to. -->
+			<a class="button button-primary" href={isEmailChange ? APP_OPEN_URL : APP_LOGIN_URL}>Open Readimus</a>
 		</section>
 		<p class="aside">
 			On a computer? Open Readimus on your phone instead. Don’t have it there yet?

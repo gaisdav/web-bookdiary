@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { env } from '$env/dynamic/public';
 	import type { EmailOtpType } from '@supabase/supabase-js';
 	import { supabase } from '$lib/supabase';
 	import { APP_OPEN_URL } from '$lib/appScheme';
-	import { googlePlayUrl } from '$lib/storeLinks';
+	import { APP_STORE_URL, googlePlayUrl } from '$lib/storeLinks';
 	import InfoLayout from '$lib/components/InfoLayout.svelte';
 
 	// The signup confirmation email links here with a `token_hash`. Where the
@@ -19,8 +18,6 @@
 	// token before that page ever sees it.
 	const SUPPORTED_TYPES: EmailOtpType[] = ['signup', 'email'];
 	const INVALID_LINK = 'This confirmation link is invalid, expired, or was already used.';
-
-	const { PUBLIC_APP_STORE_URL } = env;
 
 	// 'retry': Supabase never refused the link, so its token is most likely
 	// unspent and trying again can still work. 'halfway': the first of the two
@@ -221,8 +218,8 @@
 		</section>
 		<p class="aside">
 			On a computer? Open Readimus on your phone instead. Don’t have it there yet?
-			<a href={googlePlayUrl('email-verified')}>Get it on Google Play</a>{#if PUBLIC_APP_STORE_URL}
-				or <a href={PUBLIC_APP_STORE_URL}>the App Store</a>{/if}.
+			<a href={APP_STORE_URL}>Get it on the App Store</a> or
+			<a href={googlePlayUrl('email-verified')}>Google Play</a>.
 		</p>
 	{:else if status === 'halfway'}
 		<section class="card">

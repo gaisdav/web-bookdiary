@@ -1,9 +1,6 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
-	import { env } from '$env/dynamic/public';
-	import { googlePlayUrl } from '$lib/storeLinks';
-
-	const { PUBLIC_APP_STORE_URL, PUBLIC_IOS_APP_ID } = env;
+	import { APP_STORE_ID, APP_STORE_URL, googlePlayUrl } from '$lib/storeLinks';
 </script>
 
 <svelte:head>
@@ -13,9 +10,7 @@
 	<meta property="og:title" content="Open in Readimus" />
 	<meta property="og:description" content="Continue in the Readimus app to view this list." />
 
-	{#if PUBLIC_IOS_APP_ID}
-		<meta name="apple-itunes-app" content="app-id={PUBLIC_IOS_APP_ID}" />
-	{/if}
+	<meta name="apple-itunes-app" content="app-id={APP_STORE_ID}" />
 </svelte:head>
 
 <div class="container">
@@ -29,9 +24,7 @@
 		</p>
 
 		<div class="store-links">
-			{#if PUBLIC_APP_STORE_URL}
-				<a href={PUBLIC_APP_STORE_URL} class="store-link">Download on the App Store</a>
-			{/if}
+			<a href={APP_STORE_URL} class="store-link">Download on the App Store</a>
 			<a href={googlePlayUrl('list')} class="store-link">Get it on Google Play</a>
 		</div>
 	</div>

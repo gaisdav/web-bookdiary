@@ -1,7 +1,7 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import SiteHeader from "$lib/components/SiteHeader.svelte";
-  import { googlePlayUrl } from "$lib/storeLinks";
+  import { APP_STORE_URL, googlePlayUrl } from "$lib/storeLinks";
 </script>
 
 <svelte:head>
@@ -28,10 +28,10 @@
         Track your books, follow your friends, and discover what to read next.
       </p>
       <div class="store-actions" role="group" aria-label="App availability">
-        <span class="store-button">
-          <small>Coming soon on the</small>
+        <a class="store-button" href={APP_STORE_URL}>
+          <small>Download on the</small>
           App Store
-        </span>
+        </a>
         <a class="store-button" href={googlePlayUrl("hero")}>
           <small>Available on</small>
           Google Play
@@ -135,12 +135,12 @@
 
   <section class="final-cta shell">
     <h2>Your books deserve more than a list.</h2>
-    <p>Available now on Android. Coming soon to iOS.</p>
+    <p>Available now on iOS and Android.</p>
     <div class="store-actions centered" role="group" aria-label="App availability">
-      <span class="store-button">
-        <small>Coming soon on the</small>
+      <a class="store-button" href={APP_STORE_URL}>
+        <small>Download on the</small>
         App Store
-      </span>
+      </a>
       <a class="store-button" href={googlePlayUrl("cta")}>
         <small>Available on</small>
         Google Play

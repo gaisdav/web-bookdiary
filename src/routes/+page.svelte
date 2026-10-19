@@ -5,15 +5,15 @@
 </script>
 
 <svelte:head>
-  <title>Readimus — Your reading life, all in one place</title>
+  <title>Readimus: Book Tracker — Your reading life in one place</title>
   <meta
     name="description"
-    content="Readimus is a book tracker and reading diary. Log what you read, save notes and reviews, build personal lists, and discover books through people whose taste you trust."
+    content="Readimus is a social reading app to track books, share reviews, and connect with readers. Log what you read, save notes, build lists, and follow friends."
   />
-  <meta property="og:title" content="Readimus — Book Tracker & Reading Diary App" />
+  <meta property="og:title" content="Readimus: Book Tracker" />
   <meta
     property="og:description"
-    content="Log what you read, save notes and reviews, build personal lists, and discover books through people whose taste you trust."
+    content="Readimus is a social reading app to track books, share reviews, and connect with readers. Log what you read, save notes, build lists, and follow friends."
   />
 </svelte:head>
 
@@ -23,9 +23,10 @@
   <section class="hero shell">
     <div class="hero-copy">
       <h1>Readimus</h1>
-      <p class="hero-subtitle">Your reading life, all in one place.</p>
+      <p class="hero-subtitle">Your reading life in one place.</p>
       <p class="hero-description">
-        Track your books, follow your friends, and discover what to read next.
+        A social reading app to track books, share reviews, and connect with
+        readers.
       </p>
       <div class="store-actions" role="group" aria-label="App availability">
         <span class="store-button">

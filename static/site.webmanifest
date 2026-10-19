@@ -1,7 +1,7 @@
 {
   "name": "Readimus",
   "short_name": "Readimus",
-  "description": "Your reading life, all in one place.",
+  "description": "Your reading life in one place. A social reading app to track books, share reviews, and connect with readers.",
   "lang": "en",
   "start_url": "/",
   "scope": "/",

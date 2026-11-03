@@ -17,7 +17,6 @@ export const ROUTES = {
 	home: '/',
 	features: '/#features',
 	support: '/support',
-	contacts: '/contacts',
 	deleteAccount: '/delete-account',
 	copyright: '/copyright',
 	privacy: '/privacy',

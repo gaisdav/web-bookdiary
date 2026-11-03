@@ -1,6 +1,8 @@
 <script lang="ts">
   import SocialIcon from "$lib/components/SocialIcon.svelte";
   import { ROUTES, SOCIAL_LINKS, SUPPORT_EMAIL, mailtoSupport } from "$lib/links";
+
+  const ICON_SIZE = 20;
 </script>
 
 <footer class="footer">
@@ -9,9 +11,9 @@
       <a href={ROUTES.home} class="brand"><img src="/brand/readimus-mark-128.webp" alt="" width="38" height="38" /><span>Readimus</span></a>
       <p>Your books, notes, and reading life in one thoughtful place.</p>
       <a class="email" href={mailtoSupport()}>{SUPPORT_EMAIL}</a>
-      <ul class="socials" aria-label="Readimus on social media">
+      <ul class="socials" style:--glyph="{ICON_SIZE}px" aria-label="Readimus on social media">
         {#each SOCIAL_LINKS as social}
-          <li><a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.label} title={social.label}><SocialIcon name={social.id} /></a></li>
+          <li><a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.label} title={social.label}><SocialIcon name={social.id} size={ICON_SIZE} /></a></li>
         {/each}
       </ul>
     </div>
@@ -29,14 +31,18 @@
   .brand img { width: 38px; height: 38px; border-radius: 11px; background: var(--color-accent-soft); object-fit: cover; }
   .footer-brand p { max-width: 370px; margin: 16px 0 10px; color: var(--color-text-secondary); }
   .email { font-size: 14px; }
-  .socials { display: flex; gap: 6px; margin: 18px 0 0 -8px; padding: 0; list-style: none; }
-  .socials a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; color: var(--color-text-tertiary); text-decoration: none; transition: color 0.15s, background-color 0.15s; }
+  /* The margin pulls the glyphs, not their tap areas, flush with the email above. */
+  .socials { --hit: 36px; display: flex; gap: 6px; margin: 18px 0 0 calc((var(--glyph) - var(--hit)) / 2); padding: 0; list-style: none; }
+  .socials a { display: grid; place-items: center; width: var(--hit); height: var(--hit); border-radius: 10px; color: var(--color-text-tertiary); text-decoration: none; transition: color 0.15s, background-color 0.15s; }
   .socials a:hover { color: var(--color-text); background: var(--color-accent-soft); }
   h2 { margin-bottom: 12px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); }
   .footer-grid > div:not(.footer-brand) a { display: block; width: fit-content; margin: 8px 0; color: var(--color-text-secondary); font-size: 14px; text-decoration: none; }
   .footer-grid > div:not(.footer-brand) a:hover { color: var(--color-text); }
   .footer-bottom { display: flex; justify-content: space-between; gap: 20px; margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--color-border-light); color: var(--color-text-tertiary); font-size: 12px; }
 
+  @media (max-width: 720px), (pointer: coarse) {
+    .socials { --hit: 44px; }
+  }
   @media (max-width: 720px) {
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 38px 24px; }
     .footer-brand { grid-column: 1 / -1; }

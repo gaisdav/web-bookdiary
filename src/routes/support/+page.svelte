@@ -1,5 +1,6 @@
 <script lang="ts">
   import InfoLayout from "$lib/components/InfoLayout.svelte";
+  import { ROUTES, SUPPORT_EMAIL, mailtoSupport } from "$lib/links";
 </script>
 
 <InfoLayout
@@ -12,7 +13,7 @@
   <section class="card card-accent">
     <h2>Contact support</h2>
     <p>Email us with a short description of the issue. Please never send your password.</p>
-    <a class="mail-button" href="mailto:support@readimus.com">support@readimus.com</a>
+    <a class="mail-button" href={mailtoSupport()}>{SUPPORT_EMAIL}</a>
   </section>
   <div class="grid">
     <section class="card">
@@ -21,7 +22,7 @@
     </section>
     <section class="card">
       <h3>I want to delete my account</h3>
-      <p>Follow the steps on our <a href="/delete-account">Delete Account</a> page.</p>
+      <p>Follow the steps on our <a href={ROUTES.deleteAccount}>Delete Account</a> page.</p>
     </section>
     <section class="card">
       <h3>I found abusive content</h3>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import InfoLayout from "$lib/components/InfoLayout.svelte";
+  import { ROUTES } from "$lib/links";
 
   $: is404 = $page.status === 404;
 </script>
@@ -19,7 +20,7 @@
     : "Sorry, this page couldn’t load. Please try again in a moment."}
 >
   <div class="actions">
-    <a class="button button-primary" href="/">Go to the home page</a>
-    <a class="button button-secondary" href="/support">Get help</a>
+    <a class="button button-primary" href={ROUTES.home}>Go to the home page</a>
+    <a class="button button-secondary" href={ROUTES.support}>Get help</a>
   </div>
 </InfoLayout>

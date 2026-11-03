@@ -5,13 +5,12 @@
 	// TODO: remove @vercel/analytics (package + this import + injectAnalytics call)
 	// if we move away from Vercel.
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+	import { SITE_ORIGIN } from '$lib/links';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
-	const ORIGIN = 'https://readimus.com';
-
 	$: path = $page.url.pathname === '/' ? '/' : $page.url.pathname.replace(/\/$/, '');
-	$: canonical = ORIGIN + path;
+	$: canonical = SITE_ORIGIN + path;
 </script>
 
 <svelte:head>

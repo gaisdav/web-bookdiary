@@ -1,6 +1,7 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import SiteHeader from "$lib/components/SiteHeader.svelte";
+  import { ROUTES } from "$lib/links";
   import { renderMarkdown } from "$lib/markdown";
 
   export let pageTitle: string;
@@ -21,7 +22,7 @@
 
 <main class="legal-shell shell">
   <div class="legal-toolbar">
-    <a class="back-link" href="/">← Readimus</a>
+    <a class="back-link" href={ROUTES.home}>← Readimus</a>
   </div>
 
   <article class="legal-content" lang="en">

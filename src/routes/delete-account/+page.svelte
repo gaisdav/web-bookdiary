@@ -1,5 +1,6 @@
 <script lang="ts">
   import InfoLayout from "$lib/components/InfoLayout.svelte";
+  import { ROUTES, mailtoSupport } from "$lib/links";
 </script>
 
 <InfoLayout
@@ -20,10 +21,10 @@
   <section class="card card-accent">
     <h2>Request deletion by email</h2>
     <p>Email us from the address connected to your account. Include your username if you have one. We may ask you to verify ownership, but we will never ask for your password.</p>
-    <a class="mail-button" href="mailto:support@readimus.com?subject=Delete%20my%20Readimus%20account">Request account deletion</a>
+    <a class="mail-button" href={mailtoSupport("Delete my Readimus account")}>Request account deletion</a>
   </section>
   <section class="card">
     <h2>What happens next</h2>
-    <p>Your account and associated personal data will be deleted or anonymized, except for limited information we must retain for security, legal obligations, or resolving disputes, as described in our <a href="/privacy">Privacy Policy</a>.</p>
+    <p>Your account and associated personal data will be deleted or anonymized, except for limited information we must retain for security, legal obligations, or resolving disputes, as described in our <a href={ROUTES.privacy}>Privacy Policy</a>.</p>
   </section>
 </InfoLayout>

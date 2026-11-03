@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
-  import { APP_LOGIN_URL } from "$lib/appScheme";
+  import { APP_LOGIN_URL, ROUTES } from "$lib/links";
   import InfoLayout from "$lib/components/InfoLayout.svelte";
   import StatusMark from "$lib/components/StatusMark.svelte";
 
@@ -218,7 +218,7 @@
         <li>Need a new link? On the Readimus sign-in screen, tap “Forgot password?” and open the newest email.</li>
         <li>Already changed your password? Then you’re done: sign in with it.</li>
       </ul>
-      <p class="help">Still stuck? <a href="/support">Get help</a></p>
+      <p class="help">Still stuck? <a href={ROUTES.support}>Get help</a></p>
     </section>
   {/if}
 </InfoLayout>

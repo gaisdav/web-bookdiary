@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { appUrlFor } from "$lib/appScheme";
-  import { APP_STORE_ID, APP_STORE_URL, googlePlayUrl } from "$lib/storeLinks";
+  import { APP_STORE_ID, APP_STORE_URL, appUrlFor, googlePlayUrl } from "$lib/links";
   import InfoLayout from "$lib/components/InfoLayout.svelte";
 
   // Where a link shared from the app lands when the app did not take it: no

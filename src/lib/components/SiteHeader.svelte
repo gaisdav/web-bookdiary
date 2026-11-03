@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { ROUTES } from "$lib/links";
+
   export let showName = true;
 
   let open = false;
@@ -14,7 +16,7 @@
 
 <header class="site-header" bind:this={header}>
   <div class="shell header-inner">
-    <a class="brand" href="/" aria-label="Readimus home" on:click={close}>
+    <a class="brand" href={ROUTES.home} aria-label="Readimus home" on:click={close}>
       <img src="/brand/readimus-mark-128.webp" alt="" width="42" height="42" />
       {#if showName}<span>Readimus</span>{/if}
     </a>
@@ -24,8 +26,8 @@
     </button>
 
     <nav class:open aria-label="Main navigation">
-      <a href="/#features" on:click={close}>Features</a>
-      <a href="/support" on:click={close}>Support</a>
+      <a href={ROUTES.features} on:click={close}>Features</a>
+      <a href={ROUTES.support} on:click={close}>Support</a>
     </nav>
   </div>
 </header>

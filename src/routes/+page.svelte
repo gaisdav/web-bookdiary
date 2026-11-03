@@ -1,7 +1,7 @@
 <script lang="ts">
   import Footer from "$lib/components/Footer.svelte";
   import SiteHeader from "$lib/components/SiteHeader.svelte";
-  import { APP_STORE_URL, googlePlayUrl } from "$lib/storeLinks";
+  import { APP_STORE_URL, googlePlayUrl } from "$lib/links";
 </script>
 
 <svelte:head>

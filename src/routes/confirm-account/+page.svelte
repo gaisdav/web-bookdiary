@@ -19,7 +19,7 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { supabase } from "$lib/supabase";
-  import { APP_OPEN_URL, ROUTES } from "$lib/links";
+  import { APP_LOGIN_URL, ROUTES } from "$lib/links";
   import InfoLayout from "$lib/components/InfoLayout.svelte";
   import StatusMark from "$lib/components/StatusMark.svelte";
 
@@ -51,14 +51,18 @@
   });
 
   // The guest started this in the app, on a phone almost certainly the same
-  // one, so hand them straight back to it — the app notices the account is
-  // no longer a guest the moment it is in the foreground again. iOS asks
-  // first ("Open in Readimus?"). A desktop has no app to open, so it is not
-  // tried there, and the button covers a browser that will not navigate
+  // one, so hand them straight back to it. Setting the password ended the
+  // account's other sessions, the guest session in the app among them (GoTrue
+  // does that on every password change), so the app does not switch to the new
+  // account by itself: the guest has to sign in with the password chosen here.
+  // The login link is what tells the app so: a newer one opens its sign-in
+  // step (it fills the email in from its own profile, the link carries none);
+  // an older one only opens. iOS asks first ("Open in Readimus?"). A desktop has no app to open, so it is
+  // not tried there, and the button covers a browser that will not navigate
   // without a fresh tap.
   function returnToApp() {
     if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      window.location.href = APP_OPEN_URL;
+      window.location.href = APP_LOGIN_URL;
     }
   }
 
@@ -128,13 +132,16 @@
         return;
       }
 
-      // scope: 'local' — the default ('global') revokes the refresh token
-      // for every session on this account, not just this browser tab. This
-      // account's mobile app is very likely still signed in as the same
-      // (now no-longer-anonymous) user; a bare signOut() here would force
-      // it to log out the moment this page finishes, instead of the
-      // "nothing to do, it just picks up the real account" the app side
-      // was built to expect.
+      // scope: 'local' — only the session this page opened from the link. The
+      // default ('global') would end every session of the account on purpose;
+      // that is for a password reset, where the old one may be in someone
+      // else's hands, not for finishing an account the person just made.
+      //
+      // It does not keep the app signed in, though: setting the password has
+      // already ended the account's other sessions (GoTrue does that on every
+      // password change, whatever the scope here; Supabase lists it among the
+      // ways a session ends). That is why the page sends the guest back to the
+      // app's sign-in.
       await supabase.auth.signOut({ scope: "local" });
       success = true;
       showForm = false;
@@ -173,7 +180,7 @@
           eyebrow: "Account created",
           title: "Your account is ready.",
           intro:
-            "Go back to the Readimus app: it switches to your new account on its own, and everything you added as a guest is still there.",
+            "Open the Readimus app and sign in with your email and the password you just set. Everything you added as a guest is still there.",
         };
       case "failed":
         return { eyebrow: "Create your account", title: "This link didn’t work.", intro: message };
@@ -244,18 +251,21 @@
   {:else if step === "done"}
     <section class="card card-accent">
       <h2>Continue in the app</h2>
-      <p>If Readimus didn’t open by itself, open it now. On a computer, go back to the app on your phone.</p>
+      <p>If Readimus didn’t open by itself, open it now and sign in with your email and the password you just set. On a computer, go back to the app on your phone.</p>
       <div class="actions">
-        <a class="button button-primary" href={APP_OPEN_URL}>Open Readimus</a>
+        <a class="button button-primary" href={APP_LOGIN_URL}>Open Readimus</a>
       </div>
     </section>
   {:else if step === "failed"}
     <section class="card">
       <h2>What to do next</h2>
       <ul>
-        <li>Already set your password? Then you’re done: go back to the Readimus app.</li>
-        <li>Otherwise, start creating your account again in the Readimus app and open the newest email we send you.</li>
+        <li>Already set your password? Then you’re done: open the Readimus app and sign in with it.</li>
+        <li>Otherwise, open the Readimus app and use the newest email we sent you; its link can be opened once.</li>
       </ul>
+      <div class="actions">
+        <a class="button button-primary" href={APP_LOGIN_URL}>Open Readimus</a>
+      </div>
       <p class="help">Still stuck? <a href={ROUTES.support}>Get help</a></p>
     </section>
   {/if}

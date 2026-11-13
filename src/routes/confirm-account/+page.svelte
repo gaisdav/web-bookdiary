@@ -55,9 +55,9 @@
   // account's other sessions, the guest session in the app among them (GoTrue
   // does that on every password change), so the app does not switch to the new
   // account by itself: the guest has to sign in with the password chosen here.
-  // The login link is what tells the app so — it opens its sign-in step with
-  // the email filled in; an app that does not know the link only opens. iOS
-  // asks first ("Open in Readimus?"). A desktop has no app to open, so it is
+  // The login link is what tells the app so: a newer one opens its sign-in
+  // step (it fills the email in from its own profile, the link carries none);
+  // an older one only opens. iOS asks first ("Open in Readimus?"). A desktop has no app to open, so it is
   // not tried there, and the button covers a browser that will not navigate
   // without a fresh tap.
   function returnToApp() {
@@ -139,9 +139,9 @@
       //
       // It does not keep the app signed in, though: setting the password has
       // already ended the account's other sessions (GoTrue does that on every
-      // password change, whatever the scope here). Seen in the auth logs on
-      // 2026-11-13: the app's refresh token was gone 1 s after the password was
-      // set. That is why the page sends the guest back to the app's sign-in.
+      // password change, whatever the scope here; Supabase lists it among the
+      // ways a session ends). That is why the page sends the guest back to the
+      // app's sign-in.
       await supabase.auth.signOut({ scope: "local" });
       success = true;
       showForm = false;
@@ -260,9 +260,12 @@
     <section class="card">
       <h2>What to do next</h2>
       <ul>
-        <li>Already set your password? Then you’re done: go back to the Readimus app and sign in with it.</li>
-        <li>Otherwise, start creating your account again in the Readimus app and open the newest email we send you.</li>
+        <li>Already set your password? Then you’re done: open the Readimus app and sign in with it.</li>
+        <li>Otherwise, open the Readimus app and use the newest email we sent you; its link can be opened once.</li>
       </ul>
+      <div class="actions">
+        <a class="button button-primary" href={APP_LOGIN_URL}>Open Readimus</a>
+      </div>
       <p class="help">Still stuck? <a href={ROUTES.support}>Get help</a></p>
     </section>
   {/if}

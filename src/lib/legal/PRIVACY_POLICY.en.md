@@ -1,7 +1,7 @@
 # Readimus Privacy Policy
 
 Effective date: 5 October 2026
-Last updated: 5 October 2026
+Last updated: 18 November 2026
 
 This Privacy Policy explains what personal data Readimus collects and uses, why
 we process it, who may receive it, and what rights users have.
@@ -95,9 +95,9 @@ the text of your notes, reviews, or comments. Because a report carries your
 account identifier, it is linked to your account. Crash reports are sent only
 from the released application, not from development builds.
 
-As of the date of the latest update, Readimus does not use separate SDKs for
-advertising tracking or push notifications. Usage statistics are described in
-Section 2.7.
+As of the date of the latest update, Readimus does not use SDKs for advertising
+tracking. Usage statistics are described in Section 2.7, and push notifications
+in Section 2.8.
 
 ### 2.7. Usage Analytics
 
@@ -117,12 +117,38 @@ application, not from development builds. If several people use one device, or
 you sign out and sign in to another account, the statistics from that device are
 not separated.
 
+### 2.8. Push Notifications
+
+Push notifications are optional and available only to standard accounts, not to
+guest accounts. If you turn them on, the application receives a device token
+from Google Firebase Cloud Messaging: a random identifier used to deliver
+notifications to this device. We store the token together with your account
+identifier, the platform (iOS or Android), and the application language, so
+that we can tell you about new comments, replies, followers, and follow requests
+in your language.
+
+A notification contains the name (or, if it is empty, the username) of the
+person who acted and, for comments and replies, the beginning of the comment (up
+to 120 characters), as well as the number of unread notifications shown on the
+application icon. Notifications are delivered by Google (Firebase Cloud
+Messaging) and, on iPhone, also by Apple (Apple Push Notification service).
+Whether the text is shown on the lock screen is controlled by your device
+settings.
+
+You can turn notifications off in the Readimus settings or in your device
+settings. When you turn them off in Readimus or sign out on the device, the
+token is removed from our servers.
+
 ## 3. Device Permissions and Local Data
 
 If you choose to upload an avatar, a note image, or a book cover, the application
 may request access to your camera or photo library. Access is used only after
 your action and only to the extent necessary for the feature you selected. You
 can revoke permission in your device settings.
+
+If you agree to receive push notifications (Section 2.8), the application
+requests permission to show notifications. You can revoke it in your device
+settings.
 
 Readimus stores session data, cached books and search results, a profile
 snapshot, interface settings, and a random identifier used for usage statistics
@@ -154,6 +180,7 @@ We use personal data to:
 - display your profile and content in accordance with your privacy settings;
 - provide follows, user blocking, comments, reactions, in-app notifications,
   and other community features;
+- send push notifications if you have turned them on;
 - search for books and maintain the quality of the book catalog;
 - receive and review reports, moderate content, and review decisions;
 - respond to user communications;
@@ -182,9 +209,9 @@ more of the following:
   are not overridden by your rights and freedoms;
 - **legal obligation** — where data must be processed or retained to comply with
   the law or a lawful request from a competent authority; and
-- **consent** — where consent is required for a particular optional activity.
-  You may withdraw consent without affecting the lawfulness of processing that
-  took place before withdrawal.
+- **consent** — where consent is required for a particular optional activity,
+  such as push notifications. You may withdraw consent without affecting the
+  lawfulness of processing that took place before withdrawal.
 
 Account data identified as required is necessary to create a standard account.
 Without it, the relevant features may be unavailable.
@@ -232,6 +259,8 @@ Policy with the following categories of recipients:
   error reports, described in Section 2.6;
 - **PostHog** (PostHog, Inc.) — collection and analysis of anonymous usage
   statistics, described in Section 2.7;
+- **Google** (Firebase Cloud Messaging) and **Apple** (Apple Push Notification
+  service) — delivery of push notifications, described in Section 2.8;
 - **Vercel** — temporary hosting for the website and account-related pages;
   this Policy will be updated if the hosting provider changes;
 - **email delivery and communications providers** — delivery of service
@@ -258,7 +287,8 @@ The primary region of the Supabase project is Central Europe (Frankfurt,
 Germany). Crash reports are stored in Sentry’s European Union region; Sentry’s
 operator is a company based in the United States. Anonymous usage statistics are
 stored in PostHog’s European Union region; PostHog’s operator is also a company
-based in the United States.
+based in the United States. Push notifications are delivered through the global
+infrastructure of Google and Apple, companies based in the United States.
 
 Where applicable law requires safeguards for international data transfers, we
 use legally recognized mechanisms, such as an adequacy decision, standard
@@ -284,7 +314,10 @@ security and legal requirements into account.
 - crash reports are retained by Sentry for 30 days and then deleted
   automatically;
 - anonymous usage statistics are retained by PostHog for up to 1 year and then
-  deleted automatically; and
+  deleted automatically;
+- a push notification device token is retained until you turn notifications
+  off in Readimus or sign out on that device, and is deleted automatically if
+  the application has not been opened on that device for 90 days; and
 - data remaining in backups is deleted through the normal backup rotation
   process within 7 days.
 
@@ -297,8 +330,9 @@ period, the data is deleted or anonymized.
 
 You may delete a standard account through the application settings. When you do
 so, Readimus deletes the account, associated profile, library, lists, reviews,
-comments, social connections, notes, avatar, and note images, except for data
-that must be temporarily retained for the reasons described in Section 11.
+comments, social connections, notes, avatar, note images, and push notification
+device tokens, except for data that must be temporarily retained for the reasons
+described in Section 11.
 
 Book information and covers added to the shared catalog may continue to exist as
 part of the shared book database if they are no longer associated with you and

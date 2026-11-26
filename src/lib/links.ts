@@ -69,6 +69,16 @@ export function googlePlayUrl(placement: string): string {
 	return `${GOOGLE_PLAY_LISTING}&referrer=${encodeURIComponent(referrer.toString())}`;
 }
 
+/**
+ * The Android app as a plain APK, for people without Google Play. The file is
+ * static/readimus.apk: a release build for arm64-v8a only, signed with the
+ * upload key, so it does not install over the Play build or the other way
+ * round. When replacing the file, bump APK_VERSION to the app's version.
+ */
+export const APK_VERSION = '0.0.139';
+export const APK_URL = '/readimus.apk';
+export const APK_FILE_NAME = `Readimus-${APK_VERSION}.apk`;
+
 // ── Opening the app ─────────────────────────────────────────────────────────
 
 /**

@@ -1,6 +1,6 @@
 <script lang="ts">
   import SocialIcon from "$lib/components/SocialIcon.svelte";
-  import { ROUTES, SOCIAL_LINKS, SUPPORT_EMAIL, mailtoSupport } from "$lib/links";
+  import { APK_FILE_NAME, APK_URL, APK_VERSION, ROUTES, SOCIAL_LINKS, SUPPORT_EMAIL, mailtoSupport } from "$lib/links";
 
   const ICON_SIZE = 20;
 </script>
@@ -20,7 +20,7 @@
     <div><h2>Help</h2><a href={ROUTES.support}>Support</a><a href={ROUTES.deleteAccount}>Delete account</a><a href={ROUTES.copyright}>Copyright</a></div>
     <div><h2>Legal</h2><a href={ROUTES.privacy}>Privacy Policy</a><a href={ROUTES.terms}>Terms of Use</a><a href={ROUTES.communityGuidelines}>Community Guidelines</a></div>
   </div>
-  <div class="shell footer-bottom"><span>© 2026 Readimus</span><span>Made for people who keep turning pages.</span></div>
+  <div class="shell footer-bottom"><span>© 2026 Readimus</span><span>Made for people who keep turning pages. · <a class="apk" href={APK_URL} download={APK_FILE_NAME} title="Readimus for Android, v{APK_VERSION}">Android APK</a></span></div>
 </footer>
 
 <style>
@@ -39,6 +39,8 @@
   .footer-grid > div:not(.footer-brand) a { display: block; width: fit-content; margin: 8px 0; color: var(--color-text-secondary); font-size: 14px; text-decoration: none; }
   .footer-grid > div:not(.footer-brand) a:hover { color: var(--color-text); }
   .footer-bottom { display: flex; justify-content: space-between; gap: 20px; margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--color-border-light); color: var(--color-text-tertiary); font-size: 12px; }
+  .apk { color: inherit; text-decoration: none; }
+  .apk:hover { color: var(--color-text-secondary); text-decoration: none; }
 
   @media (max-width: 720px), (pointer: coarse) {
     .socials { --hit: 44px; }

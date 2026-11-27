@@ -28,19 +28,6 @@
       ]
     },
     {
-      "source": "/readimus.apk",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/vnd.android.package-archive"
-        },
-        {
-          "key": "Content-Disposition",
-          "value": "attachment"
-        }
-      ]
-    },
-    {
       "source": "/.well-known/apple-app-site-association",
       "headers": [
         {
